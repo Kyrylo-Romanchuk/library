@@ -21,7 +21,7 @@ public class Servlet extends HttpServlet {
     public void init() throws ServletException {
         this.initializer = new Initializer();
 
-        this.getMapper.put("/bookLibraryTest", "WEB-INF/library.jsp");
+        this.getMapper.put("/bookLibrary", "/WEB-INF/library.jsp");
     }
 
     @Override

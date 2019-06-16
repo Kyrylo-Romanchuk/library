@@ -7,10 +7,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<p>TEST</p>
-<form method="get">
-    <a class="nav-link" href="${pageContext.request.contextPath}/bookLibrary" role="button">
-        Library <span class="sr-only">(current)</span></a>
-</form>
+<a class="nav-link" href="${pageContext.request.contextPath}/library/bookLibrary" role="button">
+    Library <span class="sr-only">(current)</span></a>
 </body>
 </html>
