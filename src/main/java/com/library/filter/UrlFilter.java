@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.Arrays;
 
 @WebFilter("/*")
-public class urlFilter implements Filter {
+public class UrlFilter implements Filter {
 
-    private final String[] values = {".*/library/.*", "/"};
+    private final String[] values = {"/library/.*", "/"};
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,7 +22,7 @@ public class urlFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String requestUri = httpServletRequest.getRequestURI().replace(httpServletRequest.getContextPath() + "", "");
 
-        if (!Arrays.stream(values).anyMatch(requestUri::matches)) {
+        if (Arrays.stream(values).noneMatch(requestUri::matches)) {
             request.getRequestDispatcher("/library" + requestUri).forward(request, response);
         } else {
             chain.doFilter(request, response);
