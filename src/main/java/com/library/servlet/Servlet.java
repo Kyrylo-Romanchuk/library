@@ -4,6 +4,7 @@ import com.library.component.Initializer;
 import com.library.controller.BookLibraryController;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-
+@WebServlet("/library/*")
 public class Servlet extends HttpServlet {
 
     private Map<String, Function<HttpServletRequest, String>> getMapper = new HashMap<>();
@@ -20,7 +21,7 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        this.getMapper.put("/bookLibrary", new BookLibraryController(initializer.getBookDto())::getUrl);
+        this.getMapper.put("/books", new BookLibraryController(initializer.getBookDto())::getUrl);
     }
 
     @Override
