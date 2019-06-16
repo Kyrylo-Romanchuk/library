@@ -1,16 +1,17 @@
-package com.library.model;
+package com.library.data.model;
 
 public class Book {
     private String name;
     private Integer year;
     private String author;
-    private String bookInfo;
+    private String info;
     private Enum Language;
 
-    public Book(String name, Integer year, String author, Enum language) {
+    public Book(String name, Integer year, String author, String info,Enum language) {
         this.name = name;
         this.year = year;
         this.author = author;
+        this.info = info;
         this.Language = language;
     }
 
@@ -38,12 +39,12 @@ public class Book {
         this.author = author;
     }
 
-    public String getBookInfo() {
-        return bookInfo;
+    public String getInfo() {
+        return info;
     }
 
-    public void setBookInfo(String bookInfo) {
-        this.bookInfo = bookInfo;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public Enum getLanguage() {

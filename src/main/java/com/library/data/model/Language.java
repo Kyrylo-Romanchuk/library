@@ -1,4 +1,4 @@
-package com.library.model;
+package com.library.data.model;
 
 public enum Language {
     Ukraine,
