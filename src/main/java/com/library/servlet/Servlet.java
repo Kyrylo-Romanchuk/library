@@ -1,8 +1,8 @@
 package com.library.servlet;
 
 import com.library.component.Initializer;
+import com.library.controller.BookLibraryController;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,18 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 
 public class Servlet extends HttpServlet {
 
-    private Map<String, String> getMapper = new HashMap<>();
-    private Initializer initializer;
+    private Map<String, Function<HttpServletRequest, String>> getMapper = new HashMap<>();
+    private Initializer initializer = new Initializer();
 
     @Override
     public void init() throws ServletException {
-        this.initializer = new Initializer();
-
-        this.getMapper.put("/bookLibrary", "/WEB-INF/library.jsp");
+        this.getMapper.put("/bookLibrary", new BookLibraryController(initializer.getBookDto())::getUrl);
     }
 
     @Override
@@ -33,10 +32,8 @@ public class Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
-    private void doReference(HttpServletRequest request, HttpServletResponse response, Map<String, String> mapper) throws ServletException, IOException {
-        String requestURI = request.getRequestURI().replace(request.getContextPath() + "/library", "");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(mapper.get(requestURI));
-        request.setAttribute("books", initializer.getBookDto().getBookList());
-        requestDispatcher.forward(request, response);
+    private void doReference(HttpServletRequest request, HttpServletResponse response, Map<String, Function<HttpServletRequest, String>> mapper) throws ServletException, IOException {
+        String requestURL = request.getRequestURI().replace(request.getContextPath() + "/library", "");
+        request.getRequestDispatcher(mapper.get(requestURL).apply(request)).forward(request, response);
     }
 }
