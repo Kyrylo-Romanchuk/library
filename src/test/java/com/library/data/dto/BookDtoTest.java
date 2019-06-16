@@ -11,16 +11,17 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BookDtoTest {
 
     @Mock
     List<Book> bookList;
 
     @InjectMocks
-    BookDto bookDto = new BookDto(bookList);
+    BookDto bookDto;
 
     @Test
     public void getBookList() {
-        assertEquals(bookDto.getBookList(), bookList);
+        assertArrayEquals(bookList.toArray(), bookDto.getBookList().toArray());
     }
 }
