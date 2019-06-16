@@ -1,6 +1,6 @@
 package com.library.controller;
 
-import com.library.data.dto.BookDto;
+import com.library.data.dao.BookDao;
 import com.library.data.model.Book;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,15 +25,15 @@ public class BookLibraryControllerTest {
     HttpServletRequest httpServletRequest;
 
     @Mock
-    BookDto bookDto;
+    BookDao bookDao;
 
     @InjectMocks
     BookLibraryController bookLibraryController;
 
     @Test
     public void getUrl() {
-        when(bookDto.getBookList()).thenReturn(bookList);
-        assertEquals("/WEB-INF/library.jsp", bookLibraryController.getUrl(httpServletRequest));
+        when(bookDao.getBookList()).thenReturn(bookList);
+        assertEquals("/WEB-INF/library.jsp", bookLibraryController.showBookList(httpServletRequest));
         verify(httpServletRequest).setAttribute("books", bookList);
     }
 }

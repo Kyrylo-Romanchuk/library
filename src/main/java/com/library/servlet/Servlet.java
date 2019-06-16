@@ -21,7 +21,7 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        this.getMapper.put("/books", new BookLibraryController(initializer.getBookDto())::getUrl);
+        this.getMapper.put("/books", new BookLibraryController(initializer.getBookDao())::showBookList);
     }
 
     @Override

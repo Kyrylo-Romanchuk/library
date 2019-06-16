@@ -5,14 +5,14 @@ public class Book {
     private Integer year;
     private String author;
     private String info;
-    private Enum Language;
+    private Enum language;
 
-    public Book(String name, Integer year, String author, String info,Enum language) {
+    public Book(String name, Integer year, String author, String info, Enum language) {
         this.name = name;
         this.year = year;
         this.author = author;
         this.info = info;
-        this.Language = language;
+        this.language = language;
     }
 
     public String getName() {
@@ -48,10 +48,10 @@ public class Book {
     }
 
     public Enum getLanguage() {
-        return Language;
+        return language;
     }
 
     public void setLanguage(Enum language) {
-        Language = language;
+        this.language = language;
     }
 }

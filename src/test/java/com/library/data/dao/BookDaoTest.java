@@ -1,4 +1,4 @@
-package com.library.data.dto;
+package com.library.data.dao;
 
 import com.library.data.model.Book;
 import org.junit.Test;
@@ -12,16 +12,16 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BookDtoTest {
+public class BookDaoTest {
 
     @Mock
     List<Book> bookList;
 
     @InjectMocks
-    BookDto bookDto;
+    BookDao bookDao;
 
     @Test
     public void getBookList() {
-        assertArrayEquals(bookList.toArray(), bookDto.getBookList().toArray());
+        assertArrayEquals(bookList.toArray(), bookDao.getBookList().toArray());
     }
 }
