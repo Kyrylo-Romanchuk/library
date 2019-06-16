@@ -9,12 +9,8 @@ import java.util.List;
 public class BookDto {
     private List<Book> books;
 
-    public BookDto() {
-        this.books = Arrays.asList(
-                new Book("Kobzar", 1840, "Shevchenko", "There is a very bad book", Language.Ukraine),
-                new Book("Lord of the rings", 1948, "Tolkien", "Lord of the rings, you should read this book", Language.English),
-                new Book("Dark elf", 1988, "Salvatore", "Dark elf, this book about drou", Language.Russian)
-        );
+    public BookDto(List <Book> bookList) {
+        this.books = bookList;
     }
 
     public List<Book> getBookList() {
