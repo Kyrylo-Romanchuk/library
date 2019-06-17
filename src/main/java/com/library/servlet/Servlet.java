@@ -2,6 +2,7 @@ package com.library.servlet;
 
 import com.library.component.Initializer;
 import com.library.controller.BookLibraryController;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,10 +23,14 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        this.getMapper.put("/books", new BookLibraryController(initializer.getBookDao())::showBookList);
-        this.getMapper.put("/book/add", new BookLibraryController(initializer.getBookDao())::showAddBook);
 
-        this.postMapper.put("/addNewBook", new BookLibraryController(initializer.getBookDao())::addNewBook);
+        BookLibraryController bookLibraryController = initializer.getBookLibraryController();
+
+        getMapper.put("/books", bookLibraryController::showBookList);
+        getMapper.put("/books/add", bookLibraryController::showAddNewBook);
+
+        postMapper.put("/books/add", bookLibraryController::addNewBook);
+
     }
 
     @Override
@@ -39,7 +44,13 @@ public class Servlet extends HttpServlet {
     }
 
     private void doReference(HttpServletRequest request, HttpServletResponse response, Map<String, Function<HttpServletRequest, String>> mapper) throws ServletException, IOException {
-        String requestURL = request.getRequestURI().replace(request.getContextPath() + "/library", "");
-        request.getRequestDispatcher(mapper.get(requestURL).apply(request)).forward(request, response);
-}
+        request.getSession().setAttribute("redirect", false);
+        String requestURI = request.getRequestURI().replace(request.getContextPath() + "/library", "");
+        String requestURL = mapper.get(requestURI).apply(request);
+        if ((boolean) request.getSession().getAttribute("redirect")) {
+            response.sendRedirect(request.getContextPath() + requestURL);
+        } else {
+            request.getRequestDispatcher(requestURL).forward(request, response);
+        }
+    }
 }

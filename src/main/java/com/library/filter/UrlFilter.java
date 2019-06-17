@@ -24,11 +24,6 @@ public class UrlFilter implements Filter {
 
         requestUri = httpServletRequest.getRequestURI().replace(httpServletRequest.getContextPath() + "", "");
 
-        if (httpServletRequest.getMethod().equals("POST")) {
-            String[] subString = requestUri.split("/");
-            requestUri = "/" + subString[subString.length - 1];
-        }
-
         if (Arrays.stream(values).noneMatch(requestUri::matches)) {
             request.getRequestDispatcher("/library" + requestUri).forward(request, response);
         } else {

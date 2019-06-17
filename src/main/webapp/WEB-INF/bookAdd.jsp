@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 <body class="text-center">
-<form class="justify-content-center" method="post" action="addNewBook">
+<form class="justify-content-center" method="post" action="${pageContext.request.contextPath}/books/add">
     <div class="text-center">
         <h1>Add new book</h1>
     </div>

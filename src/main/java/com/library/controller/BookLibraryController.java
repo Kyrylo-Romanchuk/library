@@ -20,14 +20,14 @@ public class BookLibraryController {
         return "/WEB-INF/library.jsp";
     }
 
-    public String showAddBook(HttpServletRequest request) {
+    public String showAddNewBook(HttpServletRequest request) {
         request.setAttribute("languages", Language.values());
         return "/WEB-INF/bookAdd.jsp";
     }
 
-    public String addNewBook(HttpServletRequest request){
+    public String addNewBook(HttpServletRequest request) {
+        request.getSession().setAttribute("redirect", true);
         bookDao.addNewBook(bookConverter.convert(request));
-//        return "/book/add";
-        return "/library";
+        return "/books";
     }
 }

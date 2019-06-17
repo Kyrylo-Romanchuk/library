@@ -9,7 +9,7 @@
 <body>
 <a class="nav-link" href="${pageContext.request.contextPath}/books" role="button">
     Library <span class="sr-only">(current)</span></a>
-<a class="nav-link" href="${pageContext.request.contextPath}/book/add" role="button">
+<a class="nav-link" href="${pageContext.request.contextPath}/books/add" role="button">
     Add book to the library <span class="sr-only">(current)</span></a>
 </body>
 </html>
