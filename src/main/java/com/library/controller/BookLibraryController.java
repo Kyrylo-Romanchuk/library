@@ -10,9 +10,9 @@ public class BookLibraryController {
     private final BookDao bookDao;
     private final BookConverter bookConverter;
 
-    public BookLibraryController(BookDao bookDao) {
+    public BookLibraryController(BookDao bookDao, BookConverter bookConverter) {
         this.bookDao = bookDao;
-        bookConverter = new BookConverter();
+        this.bookConverter = bookConverter;
     }
 
     public String showBookList(HttpServletRequest request) {

@@ -1,6 +1,7 @@
 package com.library.component;
 
 import com.library.controller.BookLibraryController;
+import com.library.data.converter.BookConverter;
 import com.library.data.dao.BookDao;
 import com.library.data.model.Book;
 import com.library.data.model.Language;
@@ -18,7 +19,7 @@ public class Initializer {
         bookList.add(new Book("Dark elf", 1988, "Salvatore", "Dark elf, this book about drou", Language.Russian));
         BookDao bookDao = new BookDao(bookList);
 
-        bookLibraryController = new BookLibraryController(bookDao);
+        bookLibraryController = new BookLibraryController(bookDao, new BookConverter());
     }
 
     public BookLibraryController getBookLibraryController() {
