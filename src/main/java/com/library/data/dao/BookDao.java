@@ -14,4 +14,8 @@ public class BookDao {
     public List<Book> getBookList() {
         return books;
     }
+
+    public void addNewBook (Book book){
+        books.add(book);
+    }
 }

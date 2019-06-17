@@ -20,7 +20,14 @@ public class UrlFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String requestUri = httpServletRequest.getRequestURI().replace(httpServletRequest.getContextPath() + "", "");
+        String requestUri;
+
+        requestUri = httpServletRequest.getRequestURI().replace(httpServletRequest.getContextPath() + "", "");
+
+        if (httpServletRequest.getMethod().equals("POST")) {
+            String[] subString = requestUri.split("/");
+            requestUri = "/" + subString[subString.length - 1];
+        }
 
         if (Arrays.stream(values).noneMatch(requestUri::matches)) {
             request.getRequestDispatcher("/library" + requestUri).forward(request, response);

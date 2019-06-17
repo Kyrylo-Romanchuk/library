@@ -30,12 +30,11 @@
             <input type="text" id="bookInfo" name="bookInfo" class="form-control" placeholder="Enter book info"
                    required=""
                    autofocus="">
-            <label for="language">Book language</label>
-            <select class="form-select-button form-control" id="language" name="language">
+            <label for="bookLanguage">Book language</label>
+            <select class="form-select-button form-control" id="bookLanguage" name="bookLanguage">
 <%--                custom-select form-control--%>
-                <option value="">...</option>
                 <c:forEach var="book" items="${languages}">
-                    <option value="book">${book}</option>
+                    <option value=${book}>${book}</option>
                 </c:forEach>
             </select>
         </div>
