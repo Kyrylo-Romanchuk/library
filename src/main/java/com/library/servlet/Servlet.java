@@ -17,11 +17,13 @@ import java.util.function.Function;
 public class Servlet extends HttpServlet {
 
     private Map<String, Function<HttpServletRequest, String>> getMapper = new HashMap<>();
+    private Map<String, Function<HttpServletRequest, String>> postMapper = new HashMap<>();
     private Initializer initializer = new Initializer();
 
     @Override
     public void init() throws ServletException {
         this.getMapper.put("/books", new BookLibraryController(initializer.getBookDao())::showBookList);
+        this.getMapper.put("/book/add", new BookLibraryController(initializer.getBookDao())::showAddBook);
     }
 
     @Override
@@ -31,6 +33,7 @@ public class Servlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doReference(request, response, postMapper);
     }
 
     private void doReference(HttpServletRequest request, HttpServletResponse response, Map<String, Function<HttpServletRequest, String>> mapper) throws ServletException, IOException {

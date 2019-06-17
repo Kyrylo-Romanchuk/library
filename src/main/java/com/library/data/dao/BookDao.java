@@ -7,7 +7,7 @@ import java.util.List;
 public class BookDao {
     private List<Book> books;
 
-    public BookDao(List <Book> bookList) {
+    public BookDao(List<Book> bookList) {
         this.books = bookList;
     }
 
