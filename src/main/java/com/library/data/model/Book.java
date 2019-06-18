@@ -7,7 +7,8 @@ public class Book {
     private String info;
     private Enum language;
 
-    public Book(){}
+    public Book() {
+    }
 
     public Book(String name, Integer year, String author, String info, Enum language) {
         this.name = name;

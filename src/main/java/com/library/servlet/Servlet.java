@@ -2,7 +2,6 @@ package com.library.servlet;
 
 import com.library.component.Initializer;
 import com.library.controller.BookLibraryController;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,13 +43,19 @@ public class Servlet extends HttpServlet {
     }
 
     private void doReference(HttpServletRequest request, HttpServletResponse response, Map<String, Function<HttpServletRequest, String>> mapper) throws ServletException, IOException {
-        request.getSession().setAttribute("redirect", false);
         String requestURI = request.getRequestURI().replace(request.getContextPath() + "/library", "");
-        String requestURL = mapper.get(requestURI).apply(request);
-        if ((boolean) request.getSession().getAttribute("redirect")) {
-            response.sendRedirect(request.getContextPath() + requestURL);
+        if (mapper.containsKey(requestURI)) {
+            String targetURL = mapper.get(requestURI).apply(request);
+            if (targetURL.endsWith(".jsp")) {
+                targetURL = "/WEB-INF/jsp" + targetURL;
+            }
+            if (targetURL.startsWith("redirect:")) {
+                response.sendRedirect(request.getContextPath() + targetURL.substring(9));
+            } else {
+                request.getRequestDispatcher(targetURL).forward(request, response);
+            }
         } else {
-            request.getRequestDispatcher(requestURL).forward(request, response);
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

@@ -17,17 +17,16 @@ public class BookLibraryController {
 
     public String showBookList(HttpServletRequest request) {
         request.setAttribute("books", bookDao.getBookList());
-        return "/WEB-INF/library.jsp";
+        return "/books/library.jsp";
     }
 
     public String showAddNewBook(HttpServletRequest request) {
         request.setAttribute("languages", Language.values());
-        return "/WEB-INF/bookAdd.jsp";
+        return "/books/bookAdd.jsp";
     }
 
     public String addNewBook(HttpServletRequest request) {
-        request.getSession().setAttribute("redirect", true);
         bookDao.addNewBook(bookConverter.convert(request));
-        return "/books";
+        return "redirect:/books";
     }
 }

@@ -15,7 +15,7 @@ public class BookDao {
         return books;
     }
 
-    public void addNewBook (Book book){
+    public void addNewBook(Book book) {
         books.add(book);
     }
 }
