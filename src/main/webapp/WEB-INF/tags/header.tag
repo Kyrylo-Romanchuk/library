@@ -7,9 +7,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="${base}/books">Library</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${base}/books/add">Add new book</a>
-            </li>
         </ul>
     </div>
 </nav>

@@ -35,6 +35,7 @@
 <body>
 <tag:header/>
 <div class="container">
+    <h1 class="text-center">${title}</h1>
     <jsp:doBody/>
 </div>
 </body>

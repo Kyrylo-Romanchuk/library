@@ -1,7 +1,7 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<tag:pageModel dataTable="books">
+<tag:pageModel dataTable="books" title="Library">
     <table id="books" class="table table-striped">
         <thead>
         <tr>

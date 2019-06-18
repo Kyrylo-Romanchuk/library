@@ -20,11 +20,7 @@ public class BookConverterTest {
     @Mock
     HttpServletRequest httpServletRequest;
 
-    @Mock
-    Book book;
-
-    @Mock
-    BookConverter bookConverter;
+    BookConverter bookConverter = new BookConverter();
 
     @Test
     public void convert() {
@@ -34,15 +30,7 @@ public class BookConverterTest {
         when(httpServletRequest.getParameter("bookInfo")).thenReturn("there is a test book");
         when(httpServletRequest.getParameter("bookLanguage")).thenReturn("English");
 
-        when(bookConverter.convert(httpServletRequest)).thenReturn(book);
-
-        book = bookConverter.convert(httpServletRequest);
-
-//        when(book.getName()).thenReturn("test");
-//        when(book.getYear()).thenReturn(1990);
-//        when(book.getAuthor()).thenReturn("Testicho");
-//        when(book.getInfo()).thenReturn("there is a test book");
-//        when(book.getLanguage()).thenReturn(Language.English);
+        Book book = bookConverter.convert(httpServletRequest);
 
         assertEquals(book.getName(), "test");
         assertEquals(book.getYear().intValue(), 1990);

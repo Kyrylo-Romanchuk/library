@@ -3,6 +3,7 @@ package com.library.controller;
 import com.library.data.converter.BookConverter;
 import com.library.data.dao.BookDao;
 import com.library.data.model.Book;
+import com.library.data.model.Language;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,6 +30,9 @@ public class BookLibraryControllerTest {
     BookDao bookDao;
 
     @Mock
+    Book book;
+
+    @Mock
     BookConverter bookConverter;
 
     @InjectMocks
@@ -37,21 +41,20 @@ public class BookLibraryControllerTest {
     @Test
     public void showBookList() {
         when(bookDao.getBookList()).thenReturn(bookList);
-        assertEquals("/WEB-INF/library.jsp", bookLibraryController.showBookList(httpServletRequest));
+        assertEquals("/books/library.jsp", bookLibraryController.showBookList(httpServletRequest));
         verify(httpServletRequest).setAttribute("books", bookList);
     }
 
     @Test
     public void showAddNewBook() {
-//        assertEquals("/WEB-INF/library.jsp", bookLibraryController.showAddNewBook(httpServletRequest));
-//        verify(httpServletRequest).setAttribute("languages", Language.values());
+        assertEquals("/books/bookAdd.jsp", bookLibraryController.showAddNewBook(httpServletRequest));
+        verify(httpServletRequest).setAttribute("languages", Language.values());
     }
 
     @Test
     public void addNewBook() {
-
-        assertEquals("/books", bookLibraryController.addNewBook(httpServletRequest));
-//        verify(bookConverter).convert(httpServletRequest);
-//        verify(bookDao).addNewBook(bookConverter.convert(httpServletRequest));
+        when(bookConverter.convert(httpServletRequest)).thenReturn(book);
+        assertEquals("redirect:/books", bookLibraryController.addNewBook(httpServletRequest));
+        verify(bookDao).addNewBook(book);
     }
 }

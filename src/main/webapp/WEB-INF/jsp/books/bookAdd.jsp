@@ -2,12 +2,9 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<tag:pageModel>
+<tag:pageModel title="New book">
     <div class="text-center">
     <form class="justify-content-center" method="post" action="${pageContext.request.contextPath}/books/add">
-        <div class="text-center">
-            <h1>Add new book</h1>
-        </div>
         <div class="container col-md-5">
             <div class="form-group text-center">
                 <label for="bookName">Book name</label>
