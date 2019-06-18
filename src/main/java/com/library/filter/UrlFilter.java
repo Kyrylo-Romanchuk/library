@@ -9,7 +9,7 @@ import java.util.Arrays;
 @WebFilter("/*")
 public class UrlFilter implements Filter {
 
-    private final String[] values = {"/library/.*", "/"};
+    private final String[] values = {"/library/.*", "/", "/static/.*"};
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
