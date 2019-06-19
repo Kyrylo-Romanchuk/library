@@ -3,6 +3,7 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ attribute name="title" %>
 <%@ attribute name="dataTable" %>
+<%@ attribute name="errorMessage" %>
 
 <c:set var="base" value="${pageContext.request.contextPath}" scope="application"></c:set>
 
@@ -35,6 +36,11 @@
 <body>
 <tag:header/>
 <div class="container">
+    <c:if test="${errorMessage != null && !errorMessage.equals('')}">
+        <div class="alert alert-danger" role="alert">
+            ${errorMessage}
+        </div>
+    </c:if>
     <h1 class="text-center">${title}</h1>
     <jsp:doBody/>
 </div>

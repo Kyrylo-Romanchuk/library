@@ -1,6 +1,7 @@
 package com.library.servlet;
 
 import com.library.component.Initializer;
+import com.library.controller.AuthorController;
 import com.library.controller.BookLibraryController;
 
 import javax.servlet.ServletException;
@@ -24,11 +25,15 @@ public class Servlet extends HttpServlet {
     public void init() throws ServletException {
 
         BookLibraryController bookLibraryController = initializer.getBookLibraryController();
+        AuthorController authorController = initializer.getAuthorController();
 
         getMapper.put("/books", bookLibraryController::showBookList);
         getMapper.put("/books/add", bookLibraryController::showAddNewBook);
+        getMapper.put("/authors", authorController::showAuthorList);
+        getMapper.put("/authors/add", authorController::showAddAuthor);
 
         postMapper.put("/books/add", bookLibraryController::addNewBook);
+        postMapper.put("/authors/add", authorController::addAuthor);
 
     }
 

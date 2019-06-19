@@ -1,11 +1,9 @@
 package com.library.data.converter;
 
-import com.library.data.dao.BookDao;
 import com.library.data.model.Book;
-import com.library.data.model.Language;
+import com.library.data.model.enums.Language;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 

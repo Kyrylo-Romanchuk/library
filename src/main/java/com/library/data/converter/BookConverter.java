@@ -1,11 +1,12 @@
 package com.library.data.converter;
 
 import com.library.data.model.Book;
-import com.library.data.model.Language;
+import com.library.data.model.enums.Language;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class BookConverter {
+public class BookConverter implements Converter<HttpServletRequest, Book> {
+    @Override
     public Book convert(HttpServletRequest request) {
         Book book = new Book();
         book.setName(request.getParameter("bookName"));
