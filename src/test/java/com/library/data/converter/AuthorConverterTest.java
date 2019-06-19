@@ -20,7 +20,7 @@ public class AuthorConverterTest {
 
     private Author author;
 
-    AuthorConverter authorConverter = new AuthorConverter();
+    private AuthorConverter authorConverter = new AuthorConverter();
 
     @Test
     public void convert() {
@@ -34,7 +34,7 @@ public class AuthorConverterTest {
         DateConverter dateConverter = new DateConverter();
 
         try {
-            author = new AuthorConverter().convert(request);
+            author = authorConverter.convert(request);
         } catch (Exception e) {
             e.printStackTrace();
         }
