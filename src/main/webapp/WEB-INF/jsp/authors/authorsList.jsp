@@ -1,5 +1,6 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <tag:pageModel title="Authors list" dataTable="authors">
     <table id="authors" class="table table-striped">
@@ -18,8 +19,8 @@
                 <td>${author.getFirstName()}</td>
                 <td>${author.getLastName()}</td>
                 <td>${author.getBiography()}</td>
-                <td>${author.getBirthDay()}</td>
-                <td>${author.getDieDay()}</td>
+                <td><fmt:formatDate value="${author.getBirthDay()}" type="date" pattern="dd/MM/yyyy"/></td>
+                <td><fmt:formatDate value="${author.getDieDay()}" type="date" pattern="dd/MM/yyyy"/></td>
             </tr>
         </c:forEach>
     </table>

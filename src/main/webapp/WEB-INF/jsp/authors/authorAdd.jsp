@@ -25,11 +25,11 @@
                            placeholder="Enter biography"
                            required="" autofocus="">
                     <label for="birthDay">Birthday</label>
-                    <input type="text" id="birthDay" name="birthDay" class="form-control" placeholder="Enter birthday"
+                    <input type="text" id="birthDay" name="birthDay" class="form-control" placeholder="dd/MM/yyyy"
                            required=""
                            autofocus="">
                     <label for="dieDay">Die day</label>
-                    <input type="text" id="dieDay" name="dieDay" class="form-control" placeholder="Enter die day"
+                    <input type="text" id="dieDay" name="dieDay" class="form-control" placeholder="dd/MM/yyyy"
                            required=""
                            autofocus="">
                 </div>
