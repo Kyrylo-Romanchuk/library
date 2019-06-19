@@ -11,15 +11,15 @@ public class AuthorDao {
         this.authors = authors;
     }
 
-    public void addAuthor (Author author){
+    public void addAuthor(Author author) {
         authors.add(author);
     }
 
-    public List<Author> getAuthorsList (){
+    public List<Author> getAuthorsList() {
         return authors;
     }
 
-    public Author findAuthorById (int id){
+    public Author findAuthorById(int id) {
         return authors.stream().filter(author -> id == author.getId()).findFirst().get();
     }
 }

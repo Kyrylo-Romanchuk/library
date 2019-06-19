@@ -1,15 +1,12 @@
 package com.library.data.converter;
 
-import com.library.data.dao.AuthorDao;
 import com.library.data.model.Author;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.activation.DataContentHandlerFactory;
 import javax.servlet.http.HttpServletRequest;
-
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;

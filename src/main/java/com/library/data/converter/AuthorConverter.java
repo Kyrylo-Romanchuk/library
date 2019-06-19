@@ -17,6 +17,7 @@ public class AuthorConverter implements Converter<HttpServletRequest, Author> {
         author.setBiography(request.getParameter("biography"));
         author.setBirthDay(dateConverter.convert(request.getParameter("birthDay")));
         author.setDieDay(dateConverter.convert(request.getParameter("dieDay")));
+        author.setFullName(author.getFirstName() + " " + author.getLastName());
         return author;
     }
 }

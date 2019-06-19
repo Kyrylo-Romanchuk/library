@@ -17,7 +17,7 @@
             <tr>
                 <td>${book.getName()}</td>
                 <td>${book.getYear()}</td>
-                <td>${book.getAuthor()}</td>
+                <td>${book.getAuthor().getFullName()}</td>
                 <td>${book.getInfo()}</td>
                 <td>${book.getLanguage()}</td>
             </tr>

@@ -3,14 +3,14 @@ package com.library.data.model;
 public class Book {
     private String name;
     private Integer year;
-    private String author;
+    private Author author;
     private String info;
     private Enum language;
 
     public Book() {
     }
 
-    public Book(String name, Integer year, String author, String info, Enum language) {
+    public Book(String name, Integer year, Author author, String info, Enum language) {
         this.name = name;
         this.year = year;
         this.author = author;
@@ -34,11 +34,11 @@ public class Book {
         this.year = year;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

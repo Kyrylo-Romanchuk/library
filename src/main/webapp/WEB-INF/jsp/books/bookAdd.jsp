@@ -15,9 +15,11 @@
                        required=""
                        autofocus="">
                 <label for="bookAuthor">Book author</label>
-                <input type="text" id="bookAuthor" name="bookAuthor" class="form-control"
-                       placeholder="Enter book author"
-                       required="" autofocus="">
+                <select class="form-select-button form-control" id="bookAuthor" name="bookAuthor">
+                    <c:forEach var="author" items="${authors}">
+                        <option value=${author.getId()}>${author.getFullName()}</option>
+                    </c:forEach>
+                </select>
                 <label for="bookInfo">Book info</label>
                 <input type="text" id="bookInfo" name="bookInfo" class="form-control" placeholder="Enter book info"
                        required=""
