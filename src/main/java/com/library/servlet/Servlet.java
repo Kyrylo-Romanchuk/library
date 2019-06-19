@@ -22,7 +22,7 @@ public class Servlet extends HttpServlet {
     private Initializer initializer = new Initializer();
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
 
         BookLibraryController bookLibraryController = initializer.getBookLibraryController();
         AuthorController authorController = initializer.getAuthorController();

@@ -11,11 +11,11 @@ public class BookDao {
         this.books = bookList;
     }
 
-    public List<Book> getBookList() {
+    public List<Book> getAll() {
         return books;
     }
 
-    public void addNewBook(Book book) {
+    public void add(Book book) {
         books.add(book);
     }
 }

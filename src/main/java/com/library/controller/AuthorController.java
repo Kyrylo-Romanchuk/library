@@ -15,7 +15,7 @@ public class AuthorController {
     }
 
     public String showAuthorList(HttpServletRequest request) {
-        request.setAttribute("authors", authorDao.getAuthorsList());
+        request.setAttribute("authors", authorDao.getAll());
         return "/authors/authorsList.jsp";
     }
 
@@ -24,12 +24,7 @@ public class AuthorController {
     }
 
     public String addAuthor(HttpServletRequest request) {
-        try {
-            authorDao.addAuthor(authorConverter.convert(request));
-            return "redirect:/authors";
-        } catch (Exception e){
-            request.setAttribute("error", e.toString());
-            return "/authors/authorAdd.jsp";
-        }
+        authorDao.add(authorConverter.convert(request));
+        return "redirect:/authors";
     }
 }

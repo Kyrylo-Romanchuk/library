@@ -11,15 +11,19 @@ public class AuthorDao {
         this.authors = authors;
     }
 
-    public void addAuthor(Author author) {
+    public void add(Author author) {
+        if (author.getId() == null) {
+            Integer maxId = authors.stream().map(Author::getId).max(Integer::compareTo).orElse(0);
+            author.setId(maxId + 1);
+        }
         authors.add(author);
     }
 
-    public List<Author> getAuthorsList() {
+    public List<Author> getAll() {
         return authors;
     }
 
-    public Author findAuthorById(int id) {
-        return authors.stream().filter(author -> id == author.getId()).findFirst().get();
+    public Author findById(int id) {
+        return authors.stream().filter(author -> id == author.getId()).findFirst().orElse(null);
     }
 }

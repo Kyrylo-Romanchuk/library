@@ -22,6 +22,6 @@ public class BookDaoTest {
 
     @Test
     public void getBookList() {
-        assertArrayEquals(bookList.toArray(), bookDao.getBookList().toArray());
+        assertArrayEquals(bookList.toArray(), bookDao.getAll().toArray());
     }
 }

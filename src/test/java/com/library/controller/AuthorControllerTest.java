@@ -39,7 +39,7 @@ public class AuthorControllerTest {
 
     @Test
     public void showAuthorList() {
-        when(authorDao.getAuthorsList()).thenReturn(authorList);
+        when(authorDao.getAll()).thenReturn(authorList);
         assertEquals("/authors/authorsList.jsp", authorController.showAuthorList(request));
         verify(request).setAttribute("authors", authorList);
     }
@@ -51,12 +51,8 @@ public class AuthorControllerTest {
 
     @Test
     public void addAuthor() {
-        try {
-            when(authorConverter.convert(request)).thenReturn(author);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        when(authorConverter.convert(request)).thenReturn(author);
         assertEquals("redirect:/authors", authorController.addAuthor(request));
-        verify(authorDao).addAuthor(author);
+        verify(authorDao).add(author);
     }
 }

@@ -1,8 +1,8 @@
-package com.library.data.model.enums;
+package com.library.data.model;
 
 public enum Language {
     Ukraine,
     English,
     Russian,
-    French;
+    French
 }

@@ -3,7 +3,7 @@ package com.library.controller;
 import com.library.data.converter.BookConverter;
 import com.library.data.dao.BookDao;
 import com.library.data.model.Book;
-import com.library.data.model.enums.Language;
+import com.library.data.model.Language;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -40,7 +40,7 @@ public class BookLibraryControllerTest {
 
     @Test
     public void showBookList() {
-        when(bookDao.getBookList()).thenReturn(bookList);
+        when(bookDao.getAll()).thenReturn(bookList);
         assertEquals("/books/library.jsp", bookLibraryController.showBookList(httpServletRequest));
         verify(httpServletRequest).setAttribute("books", bookList);
     }
@@ -55,6 +55,6 @@ public class BookLibraryControllerTest {
     public void addNewBook() {
         when(bookConverter.convert(httpServletRequest)).thenReturn(book);
         assertEquals("redirect:/books", bookLibraryController.addNewBook(httpServletRequest));
-        verify(bookDao).addNewBook(book);
+        verify(bookDao).add(book);
     }
 }

@@ -1,10 +1,9 @@
 package com.library.data.model;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Author {
-    private int id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private String fullName;
@@ -25,11 +24,11 @@ public class Author {
         this.fullName = firstName + " " + lastName;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

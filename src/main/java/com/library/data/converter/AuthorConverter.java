@@ -6,10 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 
 public class AuthorConverter implements Converter<HttpServletRequest, Author> {
 
-    private final DateConverter dateConverter = new DateConverter();
+    private final DateConverter dateConverter;
+
+    public AuthorConverter(DateConverter dateConverter) {
+        this.dateConverter = dateConverter;
+    }
 
     @Override
-    public Author convert(HttpServletRequest request) throws Exception {
+    public Author convert(HttpServletRequest request){
         Author author = new Author();
         author.setId(Integer.valueOf(request.getParameter("id")));
         author.setFirstName(request.getParameter("firstName"));
