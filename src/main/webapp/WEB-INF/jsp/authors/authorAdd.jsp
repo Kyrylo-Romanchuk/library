@@ -1,7 +1,7 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<tag:pageModel title="New author" errorMessage="${error}">
+<tag:pageModel title="New author" errorMessage="${error}" datePicker="true">
     <div class="text-center">
         <form class="justify-content-center" method="post" action="${pageContext.request.contextPath}/authors/add">
             <div class="container col-md-5">
@@ -20,18 +20,17 @@
                     <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter last name"
                            required=""
                            autofocus="">
-                    <label for="biography">Biography</label>
-                    <input type="text" id="biography" name="biography" class="form-control"
-                           placeholder="Enter biography"
-                           required="" autofocus="">
                     <label for="birthDay">Birthday</label>
-                    <input type="text" id="birthDay" name="birthDay" class="form-control" placeholder="dd/MM/yyyy"
+                    <input id="birthDay" name="birthDay" class="form-control date-picker" placeholder="dd/MM/yyyy"
                            required=""
                            autofocus="">
                     <label for="dieDay">Die day</label>
-                    <input type="text" id="dieDay" name="dieDay" class="form-control" placeholder="dd/MM/yyyy"
-                           required=""
+                    <input id="dieDay" name="dieDay" class="form-control date-picker" placeholder="dd/MM/yyyy"
                            autofocus="">
+                    <label for="biography">Biography</label>
+                    <textarea id="biography" name="biography" class="form-control"
+                              placeholder="Enter biography"
+                              required="" autofocus="" rows="5"></textarea>
                 </div>
             </div>
 

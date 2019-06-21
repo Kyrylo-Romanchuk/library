@@ -21,9 +21,9 @@ public class Initializer {
     public Initializer() {
         DateConverter dateConverter = new DateConverter();
         List<Author> authorList = new ArrayList<>();
-        authorList.add(new Author(1, "Taras", "Shevchenko", "very bad author", dateConverter.convert("09/03/1814"), dateConverter.convert("10/03/1861")));
-        authorList.add(new Author(2, "John Ronald Reuel", "Tolkien", "so good author", dateConverter.convert("03/01/1892"), dateConverter.convert("02/09/1973")));
-        authorList.add(new Author(3, "Robert Anthony", "Salvatore", "dark elf", dateConverter.convert("20/01/1959"), dateConverter.convert("00/00/0000")));
+        authorList.add(new Author(1, "Taras", "Shevchenko", "very bad author", dateConverter.convert("03/09/1814"), dateConverter.convert("03/10/1861")));
+        authorList.add(new Author(2, "John Ronald Reuel", "Tolkien", "so good author", dateConverter.convert("01/03/1892"), dateConverter.convert("09/02/1973")));
+        authorList.add(new Author(3, "Robert Anthony", "Salvatore", "dark elf", dateConverter.convert("01/20/1959"), dateConverter.convert(null)));
 
         AuthorDao authorDao = new AuthorDao(authorList);
 

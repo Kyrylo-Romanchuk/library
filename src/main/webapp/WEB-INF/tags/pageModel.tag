@@ -4,6 +4,7 @@
 <%@ attribute name="title" %>
 <%@ attribute name="dataTable" %>
 <%@ attribute name="errorMessage" %>
+<%@ attribute name="datePicker" type="java.lang.Boolean" %>
 
 <c:set var="base" value="${pageContext.request.contextPath}" scope="application"></c:set>
 
@@ -15,6 +16,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <c:if test="${datePicker}">
+        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css"/>
+        <script>
+            $(document).ready(function () {
+                var pickers = $('.date-picker');
+                for (var i = 0; i < pickers.length; i++) {
+                    var id = pickers[i].getAttribute('id');
+                    if (id) {
+                        $('#' + id).datepicker({uiLibrary: 'bootstrap4'});
+                    }
+                }
+            });
+        </script>
+    </c:if>
 
     <c:if test="${dataTable != null}">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">

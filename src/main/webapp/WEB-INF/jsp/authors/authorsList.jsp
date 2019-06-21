@@ -19,8 +19,8 @@
                 <td>${author.getFirstName()}</td>
                 <td>${author.getLastName()}</td>
                 <td>${author.getBiography()}</td>
-                <td><fmt:formatDate value="${author.getBirthDay()}" type="date" pattern="dd/MM/yyyy"/></td>
-                <td><fmt:formatDate value="${author.getDieDay()}" type="date" pattern="dd/MM/yyyy"/></td>
+                <td><fmt:formatDate value="${author.getBirthDay()}" pattern="MM/dd/yyyy"/></td>
+                <td><fmt:formatDate value="${author.getDieDay()}" pattern="MM/dd/yyyy"/></td>
             </tr>
         </c:forEach>
     </table>

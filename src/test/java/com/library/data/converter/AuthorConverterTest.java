@@ -27,25 +27,25 @@ public class AuthorConverterTest {
     @InjectMocks
     private AuthorConverter authorConverter;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
     private Author author;
 
     @Test
     public void convert() throws ParseException {
-        Date birthday = simpleDateFormat.parse("20/01/1991");
-        Date dieDay = simpleDateFormat.parse("30/06/2090");
-        when(dateConverter.convert("20/01/1991")).thenReturn(birthday);
-        when(dateConverter.convert("30/06/2090")).thenReturn(dieDay);
+        Date birthday = simpleDateFormat.parse("01/20/1991");
+        Date dieDay = simpleDateFormat.parse("06/30/2090");
+        when(dateConverter.convert("01/20/1991")).thenReturn(birthday);
+        when(dateConverter.convert("06/30/2090")).thenReturn(dieDay);
         when(request.getParameter("id")).thenReturn("1");
         when(request.getParameter("firstName")).thenReturn("test");
         when(request.getParameter("lastName")).thenReturn("testLast");
         when(request.getParameter("biography")).thenReturn("test biography");
-        when(request.getParameter("birthDay")).thenReturn("20/01/1991");
-        when(request.getParameter("dieDay")).thenReturn("30/06/2090");
+        when(request.getParameter("birthDay")).thenReturn("01/20/1991");
+        when(request.getParameter("dieDay")).thenReturn("06/30/2090");
 
         author = authorConverter.convert(request);
 
-        assertEquals(1, author.getId());
+        assertEquals(1, author.getId().intValue());
         assertEquals("test", author.getFirstName());
         assertEquals("testLast", author.getLastName());
         assertEquals("test biography", author.getBiography());
