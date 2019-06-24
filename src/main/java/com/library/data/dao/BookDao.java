@@ -16,6 +16,10 @@ public class BookDao {
     }
 
     public void add(Book book) {
+        if (book.getId() == null) {
+            Integer maxId = books.stream().map(Book::getId).max(Integer::compareTo).orElse(0);
+            book.setId(maxId + 1);
+        }
         books.add(book);
     }
 }

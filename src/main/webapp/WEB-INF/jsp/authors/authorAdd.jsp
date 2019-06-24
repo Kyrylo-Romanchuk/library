@@ -6,11 +6,6 @@
         <form class="justify-content-center" method="post" action="${pageContext.request.contextPath}/authors/add">
             <div class="container col-md-5">
                 <div class="form-group text-center">
-                    <label for="id">id</label>
-                    <input type="text" id="id" name="id" class="form-control"
-                           placeholder="Enter id"
-                           required=""
-                           autofocus="">
                     <label for="firstName">First name</label>
                     <input type="text" id="firstName" name="firstName" class="form-control"
                            placeholder="Enter first name"

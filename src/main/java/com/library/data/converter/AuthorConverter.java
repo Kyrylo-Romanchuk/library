@@ -15,7 +15,6 @@ public class AuthorConverter implements Converter<HttpServletRequest, Author> {
     @Override
     public Author convert(HttpServletRequest request){
         Author author = new Author();
-        author.setId(Integer.valueOf(request.getParameter("id")));
         author.setFirstName(request.getParameter("firstName"));
         author.setLastName(request.getParameter("lastName"));
         author.setBiography(request.getParameter("biography"));
