@@ -28,9 +28,9 @@ public class Initializer {
         AuthorDao authorDao = new AuthorDao(authorList);
 
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("Kobzar", 1840, authorDao.findById(1), "There is a very bad book", Language.Ukraine));
-        bookList.add(new Book("Lord of the rings", 1948, authorDao.findById(2), "Lord of the rings, you should read this book", Language.English));
-        bookList.add(new Book("Dark elf", 1988, authorDao.findById(3), "Dark elf, this book about drou", Language.Russian));
+        bookList.add(new Book(1, "Kobzar", 1840, authorDao.findById(1), "There is a very bad book", Language.Ukraine));
+        bookList.add(new Book(2, "Lord of the rings", 1948, authorDao.findById(2), "Lord of the rings, you should read this book", Language.English));
+        bookList.add(new Book(3, "Dark elf", 1988, authorDao.findById(3), "Dark elf, this book about drou", Language.Russian));
         BookDao bookDao = new BookDao(bookList);
 
         bookLibraryController = new BookLibraryController(bookDao, authorDao, new BookConverter(authorDao));
