@@ -13,9 +13,9 @@ import static org.junit.Assert.assertEquals;
 
 public class AuthorDaoTest {
 
-    List<Author> authorList = new ArrayList<>();
-    DateConverter dateConverter = new DateConverter();
-    AuthorDao authorDao;
+    private List<Author> authorList = new ArrayList<>();
+    private DateConverter dateConverter = new DateConverter();
+    private AuthorDao authorDao;
 
     @Before
     public void init() {

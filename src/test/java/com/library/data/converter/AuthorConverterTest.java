@@ -36,7 +36,6 @@ public class AuthorConverterTest {
         Date dieDay = simpleDateFormat.parse("06/30/2090");
         when(dateConverter.convert("01/20/1991")).thenReturn(birthday);
         when(dateConverter.convert("06/30/2090")).thenReturn(dieDay);
-        when(request.getParameter("id")).thenReturn("1");
         when(request.getParameter("firstName")).thenReturn("test");
         when(request.getParameter("lastName")).thenReturn("testLast");
         when(request.getParameter("biography")).thenReturn("test biography");
@@ -45,7 +44,6 @@ public class AuthorConverterTest {
 
         author = authorConverter.convert(request);
 
-        assertEquals(1, author.getId().intValue());
         assertEquals("test", author.getFirstName());
         assertEquals("testLast", author.getLastName());
         assertEquals("test biography", author.getBiography());

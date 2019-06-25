@@ -3,6 +3,8 @@ package com.library.controller;
 import com.library.data.converter.AuthorConverter;
 import com.library.data.dao.AuthorDao;
 import com.library.data.model.Author;
+import com.library.validator.ValidationResult;
+import com.library.validator.Validator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -20,22 +23,25 @@ import static org.mockito.Mockito.when;
 public class AuthorControllerTest {
 
     @Mock
-    Author author;
+    private Author author;
 
     @Mock
-    List<Author> authorList;
+    private List<Author> authorList;
 
     @Mock
-    HttpServletRequest request;
+    private HttpServletRequest request;
 
     @Mock
-    AuthorDao authorDao;
+    private AuthorDao authorDao;
 
     @Mock
-    AuthorConverter authorConverter;
+    private AuthorConverter authorConverter;
+
+    @Mock
+    private Validator<Author, ValidationResult> authorValidator;
 
     @InjectMocks
-    AuthorController authorController;
+    private AuthorController authorController;
 
     @Test
     public void showAuthorList() {
@@ -52,6 +58,7 @@ public class AuthorControllerTest {
     @Test
     public void addAuthor() {
         when(authorConverter.convert(request)).thenReturn(author);
+        when(authorValidator.validate(author)).thenReturn(new ValidationResult());
         assertEquals("redirect:/authors", authorController.addAuthor(request));
         verify(authorDao).add(author);
     }

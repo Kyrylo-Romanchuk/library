@@ -37,7 +37,7 @@ public class Book implements Comparable {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 

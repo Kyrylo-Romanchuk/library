@@ -18,16 +18,18 @@ import static org.mockito.Mockito.when;
 public class BookConverterTest {
 
     @Mock
-    HttpServletRequest httpServletRequest;
+    private HttpServletRequest httpServletRequest;
 
     @Mock
-    AuthorDao authorDao;
+    private AuthorDao authorDao;
 
     private DateConverter dateConverter = new DateConverter();
-    private BookConverter bookConverter = new BookConverter(authorDao);
+    private IntegerConverter integerConverter = new IntegerConverter();
 
     @Test
     public void convert() {
+
+        BookConverter bookConverter = new BookConverter(authorDao, integerConverter);
 
         Author author = new Author(1, "Taras", "Shevchenko", "very bad author", dateConverter.convert("09/03/1814"), dateConverter.convert("10/03/1861"));
 

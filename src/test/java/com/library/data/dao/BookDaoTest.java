@@ -15,10 +15,10 @@ import static org.junit.Assert.assertArrayEquals;
 public class BookDaoTest {
 
     @Mock
-    List<Book> bookList;
+    private List<Book> bookList;
 
     @InjectMocks
-    BookDao bookDao;
+    private BookDao bookDao;
 
     @Test
     public void getBookList() {
