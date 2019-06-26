@@ -14,7 +14,11 @@ public class ValidationResult {
         return validationMap;
     }
 
-    public String getResultByKey(String key) {
+    public boolean hasError(String key) {
+        return validationMap.containsKey(key);
+    }
+
+    public String getError(String key) {
         return validationMap.get(key);
     }
 }

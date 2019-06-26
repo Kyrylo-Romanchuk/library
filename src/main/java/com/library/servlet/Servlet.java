@@ -1,8 +1,9 @@
 package com.library.servlet;
 
 import com.library.component.Initializer;
-import com.library.controller.AuthorController;
-import com.library.controller.BookLibraryController;
+import com.library.component.annotation.GetMapping;
+import com.library.component.annotation.PostMapping;
+import com.library.controller.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -23,18 +26,13 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() {
+//        BookLibraryController bookLibraryController = initializer.getComponent(BookLibraryController.class);
+//        AuthorController authorController = initializer.getComponent(AuthorController.class);
+//
+        List<Controller> controllers = initializer.getComponentList(Controller.class);
 
-        BookLibraryController bookLibraryController = initializer.getBookLibraryController();
-        AuthorController authorController = initializer.getAuthorController();
-
-        getMapper.put("/books", bookLibraryController::showBookList);
-        getMapper.put("/books/add", bookLibraryController::showAddNewBook);
-        getMapper.put("/authors", authorController::showAuthorList);
-        getMapper.put("/authors/add", authorController::showAddAuthor);
-
-        postMapper.put("/books/add", bookLibraryController::addNewBook);
-        postMapper.put("/authors/add", authorController::addAuthor);
-
+        fillGetMapper(controllers);
+        fillPostMapper(controllers);
     }
 
     @Override
@@ -47,7 +45,8 @@ public class Servlet extends HttpServlet {
         doReference(request, response, postMapper);
     }
 
-    private void doReference(HttpServletRequest request, HttpServletResponse response, Map<String, Function<HttpServletRequest, String>> mapper) throws ServletException, IOException {
+    private void doReference(HttpServletRequest request, HttpServletResponse response,
+                             Map<String, Function<HttpServletRequest, String>> mapper) throws ServletException, IOException {
         String requestURI = request.getRequestURI().replace(request.getContextPath() + "/library", "");
         if (mapper.containsKey(requestURI)) {
             String targetURL = mapper.get(requestURI).apply(request);
@@ -62,5 +61,40 @@ public class Servlet extends HttpServlet {
         } else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
+    }
+
+    private void fillGetMapper(List<Controller> controllers) {
+        for (Object controller : controllers) {
+            Method[] methods = controller.getClass().getMethods();
+            for (Method method : methods) {
+                GetMapping annotation = method.getAnnotation(GetMapping.class);
+                if (annotation != null) {
+                    String url = annotation.value();
+                    getMapper.put(url, invokeController(controller, method));
+                }
+            }
+        }
+    }
+
+    private void fillPostMapper(List<Controller> controllers) {
+        for (Object controller : controllers) {
+            Method[] methods = controller.getClass().getMethods();
+            for (Method method : methods) {
+                PostMapping annotation = method.getAnnotation(PostMapping.class);
+                if (annotation != null) {
+                    postMapper.put(annotation.value(), invokeController(controller, method));
+                }
+            }
+        }
+    }
+
+    private Function<HttpServletRequest, String> invokeController(Object controller, Method method) {
+        return request -> {
+            try {
+                return (String) method.invoke(controller, request);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        };
     }
 }

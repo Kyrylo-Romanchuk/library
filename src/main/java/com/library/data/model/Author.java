@@ -6,7 +6,6 @@ public class Author {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String fullName;
     private String biography;
     private Date birthDay;
     private Date dieDay;
@@ -21,7 +20,6 @@ public class Author {
         this.biography = biography;
         this.birthDay = birthDay;
         this.dieDay = dieDay;
-        this.fullName = firstName + " " + lastName;
     }
 
     public Integer getId() {
@@ -72,11 +70,7 @@ public class Author {
         this.dieDay = dieDay;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getFullName() {
-        return fullName;
+    public String getFullName (){
+        return String.format("%s %s", firstName, lastName);
     }
 }

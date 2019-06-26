@@ -1,11 +1,13 @@
 package com.library.validator;
 
-import com.library.data.converter.DateConverter;
 import com.library.data.model.Author;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -15,14 +17,13 @@ public class AuthorValidatorTest {
     @Mock
     private Author author;
 
-    private DateConverter dateConverter = new DateConverter();
     private AuthorValidator authorValidator = new AuthorValidator();
 
     @Test
-    public void validate() {
+    public void validate() throws ParseException {
         when(author.getFirstName()).thenReturn("test");
         when(author.getLastName()).thenReturn("test");
-        when(author.getBirthDay()).thenReturn(dateConverter.convert("01/01/1990"));
+        when(author.getBirthDay()).thenReturn(new SimpleDateFormat("MM/dd/yyyy").parse("01/01/1990"));
         when(author.getBiography()).thenReturn("this is the test author");
 
         assertEquals(0, authorValidator.validate(author).getResultMap().size());

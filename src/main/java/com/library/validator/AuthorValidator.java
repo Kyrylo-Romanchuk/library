@@ -10,21 +10,21 @@ public class AuthorValidator implements Validator<Author, ValidationResult> {
         ValidationResult validationResult = new ValidationResult();
 
         String firstName = author.getFirstName();
-        if (stringIsEmpty(firstName) || !stringWithoutNumbers(firstName)) {
+        if (ValidationUtility.stringIsEmpty(firstName) || !ValidationUtility.stringWithoutNumbers(firstName)) {
             validationResult.add("firstName", "please enter the first name");
         }
 
         String lastName = author.getLastName();
-        if (stringIsEmpty(lastName) || !stringWithoutNumbers(lastName)) {
+        if (ValidationUtility.stringIsEmpty(lastName) || !ValidationUtility.stringWithoutNumbers(lastName)) {
             validationResult.add("lastName", "please enter the last name");
         }
 
-        if (stringIsEmpty(author.getBiography())) {
+        if (ValidationUtility.stringIsEmpty(author.getBiography())) {
             validationResult.add("biography", "please enter the author biography");
         }
 
         Date birthDay = author.getBirthDay();
-        if (objectIsEmpty(birthDay) || birthDay.after(new Date())) {
+        if (ValidationUtility.objectIsEmpty(birthDay) || birthDay.after(new Date())) {
             validationResult.add("birthDay", "please enter author birthday");
         }
         return validationResult;

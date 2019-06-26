@@ -19,8 +19,7 @@ public class BookConverter implements Converter<HttpServletRequest, Book> {
     public Book convert(HttpServletRequest request) {
         Book book = new Book();
         book.setName(request.getParameter("bookName"));
-        Integer bookYear = integerConverter.convert(request.getParameter("bookYear"));
-        book.setYear(bookYear);
+        book.setYear(integerConverter.convert(request.getParameter("bookYear")));
         Integer id = integerConverter.convert(request.getParameter("bookAuthor"));
         book.setAuthor(authorDao.findById(id));
         book.setInfo(request.getParameter("bookInfo"));

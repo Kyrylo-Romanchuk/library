@@ -2,10 +2,8 @@ package com.library.component;
 
 import com.library.controller.AuthorController;
 import com.library.controller.BookLibraryController;
-import com.library.data.converter.AuthorConverter;
-import com.library.data.converter.BookConverter;
-import com.library.data.converter.DateConverter;
-import com.library.data.converter.IntegerConverter;
+import com.library.controller.Controller;
+import com.library.data.converter.*;
 import com.library.data.dao.AuthorDao;
 import com.library.data.dao.BookDao;
 import com.library.data.model.Author;
@@ -15,11 +13,12 @@ import com.library.validator.AuthorValidator;
 import com.library.validator.BookValidator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Initializer {
-    private final BookLibraryController bookLibraryController;
-    private final AuthorController authorController;
+    private final Map<Class, Controller> componentMap = new HashMap<>();
 
     public Initializer() {
         DateConverter dateConverter = new DateConverter();
@@ -37,15 +36,24 @@ public class Initializer {
         bookList.add(new Book(3, "Dark elf", 1988, authorDao.findById(3), "Dark elf, this book about drou", Language.Russian));
         BookDao bookDao = new BookDao(bookList);
 
-        bookLibraryController = new BookLibraryController(bookDao, authorDao, new BookConverter(authorDao, integerConverter), new BookValidator());
-        authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator());
+        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, new BookConverter(authorDao, integerConverter), new BookValidator());
+        AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator(), new AuthorToDtoConverter());
+
+        componentMap.put(bookLibraryController.getClass(), bookLibraryController);
+        componentMap.put(authorController.getClass(), authorController);
     }
 
-    public BookLibraryController getBookLibraryController() {
-        return bookLibraryController;
+    public <T> T getComponent(Class<T> type) {
+        return (T) componentMap.get(type);
     }
 
-    public AuthorController getAuthorController() {
-        return authorController;
+    public <T> List<T> getComponentList(Class<T> type) {
+        List<T> componentList = new ArrayList<>();
+        for (Object component : componentMap.values()) {
+            if (type.isInstance(component)) {
+                componentList.add((T) component);
+            }
+        }
+        return componentList;
     }
 }

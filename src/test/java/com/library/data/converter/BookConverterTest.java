@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -23,15 +24,15 @@ public class BookConverterTest {
     @Mock
     private AuthorDao authorDao;
 
-    private DateConverter dateConverter = new DateConverter();
-    private IntegerConverter integerConverter = new IntegerConverter();
+    @Mock
+    private IntegerConverter integerConverter;
+
+    @Mock
+    private Author author;
 
     @Test
-    public void convert() {
-
+    public void convert() throws ParseException {
         BookConverter bookConverter = new BookConverter(authorDao, integerConverter);
-
-        Author author = new Author(1, "Taras", "Shevchenko", "very bad author", dateConverter.convert("09/03/1814"), dateConverter.convert("10/03/1861"));
 
         when(authorDao.findById(1)).thenReturn(author);
         when(httpServletRequest.getParameter("bookName")).thenReturn("test");
@@ -39,6 +40,8 @@ public class BookConverterTest {
         when(httpServletRequest.getParameter("bookAuthor")).thenReturn("1");
         when(httpServletRequest.getParameter("bookInfo")).thenReturn("there is a test book");
         when(httpServletRequest.getParameter("bookLanguage")).thenReturn("English");
+        when(integerConverter.convert("1990")).thenReturn(1990);
+        when(integerConverter.convert("1")).thenReturn(1);
 
         Book book = bookConverter.convert(httpServletRequest);
 

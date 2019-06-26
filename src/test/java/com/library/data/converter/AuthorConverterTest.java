@@ -28,7 +28,6 @@ public class AuthorConverterTest {
     private AuthorConverter authorConverter;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-    private Author author;
 
     @Test
     public void convert() throws ParseException {
@@ -42,7 +41,7 @@ public class AuthorConverterTest {
         when(request.getParameter("birthDay")).thenReturn("01/20/1991");
         when(request.getParameter("dieDay")).thenReturn("06/30/2090");
 
-        author = authorConverter.convert(request);
+        Author author = authorConverter.convert(request);
 
         assertEquals("test", author.getFirstName());
         assertEquals("testLast", author.getLastName());

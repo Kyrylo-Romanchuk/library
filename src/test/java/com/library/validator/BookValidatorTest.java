@@ -17,7 +17,9 @@ public class BookValidatorTest {
     @Mock
     private Book book;
 
-    private Author author = new Author();
+    @Mock
+    private Author author;
+
     private BookValidator bookValidator = new BookValidator();
 
     @Test

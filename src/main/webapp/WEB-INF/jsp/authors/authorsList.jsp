@@ -6,8 +6,7 @@
     <table id="authors" class="table table-striped">
         <thead>
         <tr>
-            <th>First name</th>
-            <th>Last name</th>
+            <th>Full name</th>
             <th>Biography</th>
             <th>Birthday</th>
             <th>Die day</th>
@@ -16,8 +15,7 @@
 
         <c:forEach var="author" items="${authors}">
             <tr>
-                <td>${author.getFirstName()}</td>
-                <td>${author.getLastName()}</td>
+                <td>${author.getFullName()}</td>
                 <td>${author.getBiography()}</td>
                 <td><fmt:formatDate value="${author.getBirthDay()}" pattern="MM/dd/yyyy"/></td>
                 <td><fmt:formatDate value="${author.getDieDay()}" pattern="MM/dd/yyyy"/></td>

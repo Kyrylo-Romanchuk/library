@@ -7,23 +7,23 @@ public class BookValidator implements Validator<Book, ValidationResult> {
     public ValidationResult validate(Book book) {
         ValidationResult validationResult = new ValidationResult();
 
-        if (stringIsEmpty(book.getName())) {
+        if (ValidationUtility.stringIsEmpty(book.getName())) {
             validationResult.add("name", "you must enter the book name");
         }
 
-        if (stringIsEmpty(book.getInfo())) {
+        if (ValidationUtility.stringIsEmpty(book.getInfo())) {
             validationResult.add("info", "you must enter the book info");
         }
 
-        if (integerIsEmpty(book.getYear())) {
+        if (ValidationUtility.integerIsEmpty(book.getYear())) {
             validationResult.add("year", "entered year is not correct (format: 'yyyy') ");
         }
 
-        if (objectIsEmpty(book.getAuthor())) {
+        if (ValidationUtility.objectIsEmpty(book.getAuthor())) {
             validationResult.add("author", "please choose the book author");
         }
 
-        if (objectIsEmpty(book.getLanguage())) {
+        if (ValidationUtility.objectIsEmpty(book.getLanguage())) {
             validationResult.add("name", "please choose the book language");
         }
         return validationResult;

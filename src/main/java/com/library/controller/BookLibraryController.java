@@ -1,5 +1,7 @@
 package com.library.controller;
 
+import com.library.component.annotation.GetMapping;
+import com.library.component.annotation.PostMapping;
 import com.library.data.converter.Converter;
 import com.library.data.dao.AuthorDao;
 import com.library.data.dao.BookDao;
@@ -10,7 +12,7 @@ import com.library.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class BookLibraryController {
+public class BookLibraryController implements Controller {
     private final BookDao bookDao;
     private final Converter<HttpServletRequest, Book> bookConverter;
     private final AuthorDao authorDao;
@@ -25,17 +27,20 @@ public class BookLibraryController {
         this.bookValidator = bookValidator;
     }
 
+    @GetMapping("/books")
     public String showBookList(HttpServletRequest request) {
         request.setAttribute("books", bookDao.getAll());
         return "/books/library.jsp";
     }
 
+    @GetMapping("/books/add")
     public String showAddNewBook(HttpServletRequest request) {
         request.setAttribute("languages", Language.values());
         request.setAttribute("authors", authorDao.getAll());
         return "/books/bookAdd.jsp";
     }
 
+    @PostMapping("/books/add")
     public String addNewBook(HttpServletRequest request) {
         Book book = bookConverter.convert(request);
         ValidationResult validationResult = bookValidator.validate(book);
@@ -44,10 +49,9 @@ public class BookLibraryController {
             return "redirect:/books";
         } else {
             request.setAttribute("validationResult", validationResult);
-            request.setAttribute("languages", Language.values());
-            request.setAttribute("authors", authorDao.getAll());
-            request.setAttribute("error", "we have some problem");
-            return "/books/bookAdd.jsp";
+            request.setAttribute("book", book);
+            return showAddNewBook(request);
+//            return "redirect:/books/add";
         }
     }
 }

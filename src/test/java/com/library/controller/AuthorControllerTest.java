@@ -1,7 +1,9 @@
 package com.library.controller;
 
 import com.library.data.converter.AuthorConverter;
+import com.library.data.converter.AuthorToDtoConverter;
 import com.library.data.dao.AuthorDao;
+import com.library.data.dto.AuthorDto;
 import com.library.data.model.Author;
 import com.library.validator.ValidationResult;
 import com.library.validator.Validator;
@@ -12,10 +14,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -40,14 +42,18 @@ public class AuthorControllerTest {
     @Mock
     private Validator<Author, ValidationResult> authorValidator;
 
+    @Mock
+    private AuthorToDtoConverter authorToDtoConverter;
+
     @InjectMocks
     private AuthorController authorController;
 
     @Test
     public void showAuthorList() {
+        List<AuthorDto> authorDtoList = new ArrayList<>();
         when(authorDao.getAll()).thenReturn(authorList);
         assertEquals("/authors/authorsList.jsp", authorController.showAuthorList(request));
-        verify(request).setAttribute("authors", authorList);
+        verify(request).setAttribute("authors", authorDtoList);
     }
 
     @Test
