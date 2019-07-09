@@ -36,7 +36,7 @@ public class LanguageController implements Controller {
     public String add(HttpServletRequest request) {
         Language language = languageConverter.convert(request);
         ValidationResult validationResult = languageValidator.validate(language);
-        if (validationResult.getResultMap().size() == 0) {
+        if (validationResult.getResultMap().isEmpty()) {
             languageDao.add(language);
             return "redirect:/languages";
         } else {

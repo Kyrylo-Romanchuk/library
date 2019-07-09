@@ -1,6 +1,6 @@
 package com.library.data.converter;
 
-import com.library.data.model.Language;
+import com.library.data.model.Genre;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,22 +13,20 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LanguageConverterTest {
+public class GenreConverterTest {
 
     @Mock
     private HttpServletRequest request;
 
     @InjectMocks
-    private LanguageConverter languageConverter;
+    private GenreConverter genreConverter;
 
     @Test
     public void convert() {
         when(request.getParameter("name")).thenReturn("test");
-        when(request.getParameter("shortName")).thenReturn("ts");
 
-        Language language = languageConverter.convert(request);
+        Genre genre = genreConverter.convert(request);
 
-        assertEquals("test", language.getName());
-        assertEquals("ts", language.getShortName());
+        assertEquals("test", genre.getName());
     }
 }

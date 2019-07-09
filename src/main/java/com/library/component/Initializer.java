@@ -2,16 +2,20 @@ package com.library.component;
 
 import com.library.controller.AuthorController;
 import com.library.controller.BookLibraryController;
+import com.library.controller.GenreController;
 import com.library.controller.LanguageController;
 import com.library.data.converter.*;
 import com.library.data.dao.AuthorDao;
 import com.library.data.dao.BookDao;
+import com.library.data.dao.GenreDao;
 import com.library.data.dao.LanguageDao;
 import com.library.data.model.Author;
 import com.library.data.model.Book;
+import com.library.data.model.Genre;
 import com.library.data.model.Language;
 import com.library.validator.AuthorValidator;
 import com.library.validator.BookValidator;
+import com.library.validator.GenreValidator;
 import com.library.validator.LanguageValidator;
 
 import java.util.ArrayList;
@@ -39,6 +43,12 @@ public class Initializer {
 
         LanguageDao languageDao = new LanguageDao(languages);
 
+        List<Genre> genres = new ArrayList<>();
+        genres.add(new Genre(1, "Classic"));
+        genres.add(new Genre(2, "Drama"));
+        genres.add(new Genre(3, "Fantasy"));
+        GenreDao genreDao = new GenreDao(genres);
+
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book(1, "Kobzar", 1840, authorDao.findById(1), "There is a very bad book", languageDao.findById(1)));
         bookList.add(new Book(2, "Lord of the rings", 1948, authorDao.findById(2), "Lord of the rings, you should read this book", languageDao.findById(3)));
@@ -48,10 +58,12 @@ public class Initializer {
         BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao,new BookConverter(authorDao, languageDao, integerConverter), new BookValidator());
         AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator(), new AuthorToDtoConverter());
         LanguageController languageController = new LanguageController(languageDao, new LanguageConverter(), new LanguageValidator());
+        GenreController genreController = new GenreController(genreDao, new GenreConverter(), new GenreValidator());
 
         componentMap.put(bookLibraryController.getClass(), bookLibraryController);
         componentMap.put(authorController.getClass(), authorController);
         componentMap.put(languageController.getClass(), languageController);
+        componentMap.put(genreController.getClass(), genreController);
     }
 
     public <T> T getComponent(Class<T> type) {

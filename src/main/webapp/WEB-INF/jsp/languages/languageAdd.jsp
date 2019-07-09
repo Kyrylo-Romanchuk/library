@@ -11,7 +11,7 @@
                            placeholder="Enter name"
                            autofocus=""
                            value="${language.getName()}">
-                    <tag:errorOnPage errorName="Name"/>
+                    <tag:errorOnPage errorName="name"/>
                     <label for="shortName">Short name</label>
                     <input type="text" id="shortName" name="shortName" class="form-control" placeholder="Enter short name"
                            autofocus=""

@@ -39,8 +39,8 @@
                             <c:set var="bookLanguage" value="${book.getLanguage()}" scope="page"></c:set>
                             <option selected value=${bookLanguage.getId()}>${bookLanguage.getName()}</option>
                         </c:if>
-                        <c:forEach var="language" items="${languages}">
-                            <option value=${language.getId()}>${language.getName()}</option>
+                        <c:forEach var="genre" items="${languages}">
+                            <option value=${genre.getId()}>${genre.getName()}</option>
                         </c:forEach>
                     </select>
                     <tag:errorOnPage errorName="language"/>

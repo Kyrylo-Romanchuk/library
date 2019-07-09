@@ -38,6 +38,9 @@ public class LanguageControllerTest {
     private HttpServletRequest request;
 
     @Mock
+    List<Language> languagesList;
+
+    @Mock
     private ValidationResult validationResult;
 
     @InjectMocks
@@ -45,7 +48,6 @@ public class LanguageControllerTest {
 
     @Test
     public void showLanguageList() {
-        List<Language> languagesList = new ArrayList<>();
         when(languageDao.getAll()).thenReturn(languagesList);
         assertEquals("/languages/languagesList.jsp", languageController.showLanguageList(request));
         verify(request).setAttribute("languages", languagesList);
