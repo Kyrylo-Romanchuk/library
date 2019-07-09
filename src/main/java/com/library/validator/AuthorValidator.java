@@ -4,7 +4,7 @@ import com.library.data.model.Author;
 
 import java.util.Date;
 
-public class AuthorValidator implements Validator<Author, ValidationResult> {
+public class AuthorValidator implements Validator<Author> {
     @Override
     public ValidationResult validate(Author author) {
         ValidationResult validationResult = new ValidationResult();

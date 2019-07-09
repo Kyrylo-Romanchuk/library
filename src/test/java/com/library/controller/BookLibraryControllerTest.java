@@ -3,8 +3,8 @@ package com.library.controller;
 import com.library.data.converter.BookConverter;
 import com.library.data.dao.AuthorDao;
 import com.library.data.dao.BookDao;
+import com.library.data.dao.LanguageDao;
 import com.library.data.model.Book;
-import com.library.data.model.Language;
 import com.library.validator.ValidationResult;
 import com.library.validator.Validator;
 import org.junit.Test;
@@ -42,7 +42,10 @@ public class BookLibraryControllerTest {
     private AuthorDao authorDao;
 
     @Mock
-    private Validator<Book, ValidationResult> bookValidator;
+    private LanguageDao languageDao;
+
+    @Mock
+    private Validator<Book> bookValidator;
 
     @InjectMocks
     private BookLibraryController bookLibraryController;
@@ -57,7 +60,7 @@ public class BookLibraryControllerTest {
     @Test
     public void showAddNewBook() {
         assertEquals("/books/bookAdd.jsp", bookLibraryController.showAddNewBook(httpServletRequest));
-        verify(httpServletRequest).setAttribute("languages", Language.values());
+        verify(httpServletRequest).setAttribute("languages", languageDao.getAll());
         verify(httpServletRequest).setAttribute("authors", authorDao.getAll());
     }
 

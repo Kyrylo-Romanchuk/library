@@ -12,29 +12,17 @@
                            placeholder="Enter first name"
                            autofocus=""
                            value="${author.getFirstName()}">
-                    <c:if test="${validationResult.hasError('firstName')}">
-                        <div class="alert alert-danger" role="alert">
-                                ${validationResult.getError('firstName')}
-                        </div>
-                    </c:if>
+                    <tag:errorOnPage errorName="firstName"/>
                     <label for="lastName">Last name</label>
                     <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter last name"
                            autofocus=""
                            value="${author.getLastName()}">
-                    <c:if test="${validationResult.hasError('lastName')}">
-                        <div class="alert alert-danger" role="alert">
-                                ${validationResult.getError('lastName')}
-                        </div>
-                    </c:if>
+                    <tag:errorOnPage errorName="lastName"/>
                     <label for="birthDay">Birthday</label>
                     <input id="birthDay" name="birthDay" class="form-control date-picker" placeholder="dd/MM/yyyy"
                            autofocus=""
                            value="<fmt:formatDate value="${author.getBirthDay()}" pattern="MM/dd/yyyy"/>">
-                    <c:if test="${validationResult.hasError('birthDay')}">
-                        <div class="alert alert-danger" role="alert">
-                                ${validationResult.getError('birthDay')}
-                        </div>
-                    </c:if>
+                    <tag:errorOnPage errorName="birthDay"/>
                     <label for="dieDay">Die day</label>
                     <input id="dieDay" name="dieDay" class="form-control date-picker" placeholder="dd/MM/yyyy"
                            autofocus=""
@@ -43,11 +31,7 @@
                     <textarea id="biography" name="biography" class="form-control"
                               placeholder="Enter biography"
                               autofocus="" rows="5">${author.getBiography()}</textarea>
-                    <c:if test="${validationResult.hasError('biography')}">
-                        <div class="alert alert-danger" role="alert">
-                                ${validationResult.getError('biography')}
-                        </div>
-                    </c:if>
+                    <tag:errorOnPage errorName="biography"/>
                 </div>
             </div>
 

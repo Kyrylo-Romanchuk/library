@@ -15,6 +15,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="${base}/authors">Authors</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${base}/languages">Languages</a>
+            </li>
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" href="${base}/genres">Genres</a>--%>
+<%--            </li>--%>
         </ul>
     </div>
 </nav>

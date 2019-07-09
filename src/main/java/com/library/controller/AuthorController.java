@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 public class AuthorController implements Controller {
     private final AuthorDao authorDao;
     private final AuthorConverter authorConverter;
-    private final Validator<Author, ValidationResult> authorValidator;
+    private final Validator<Author> authorValidator;
     private final AuthorToDtoConverter authorToDtoConverter;
 
     public AuthorController(AuthorDao authorDao, AuthorConverter authorConverter,
-                            Validator<Author, ValidationResult> authorValidator,
+                            Validator<Author> authorValidator,
                             AuthorToDtoConverter authorToDtoConverter) {
         this.authorDao = authorDao;
         this.authorConverter = authorConverter;

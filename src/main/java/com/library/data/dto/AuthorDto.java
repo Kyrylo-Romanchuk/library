@@ -11,19 +11,6 @@ public class AuthorDto {
     private Date birthDay;
     private Date dieDay;
 
-    public AuthorDto() {
-    }
-
-    public AuthorDto(int id, String firstName, String lastName, String biography, Date birthDay, Date dieDay) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.biography = biography;
-        this.birthDay = birthDay;
-        this.dieDay = dieDay;
-        this.fullName = firstName + " " + lastName;
-    }
-
     public Integer getId() {
         return id;
     }

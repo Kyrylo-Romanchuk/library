@@ -2,15 +2,17 @@ package com.library.component;
 
 import com.library.controller.AuthorController;
 import com.library.controller.BookLibraryController;
-import com.library.controller.Controller;
+import com.library.controller.LanguageController;
 import com.library.data.converter.*;
 import com.library.data.dao.AuthorDao;
 import com.library.data.dao.BookDao;
+import com.library.data.dao.LanguageDao;
 import com.library.data.model.Author;
 import com.library.data.model.Book;
 import com.library.data.model.Language;
 import com.library.validator.AuthorValidator;
 import com.library.validator.BookValidator;
+import com.library.validator.LanguageValidator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Initializer {
-    private final Map<Class, Controller> componentMap = new HashMap<>();
+    private final Map<Class, Object> componentMap = new HashMap<>();
 
     public Initializer() {
         DateConverter dateConverter = new DateConverter();
@@ -30,17 +32,26 @@ public class Initializer {
 
         AuthorDao authorDao = new AuthorDao(authorList);
 
+        List<Language> languages = new ArrayList<>();
+        languages.add(new Language(1, "Ukraine", "uk"));
+        languages.add(new Language(2, "Russian", "ru"));
+        languages.add(new Language(3, "English", "en"));
+
+        LanguageDao languageDao = new LanguageDao(languages);
+
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book(1, "Kobzar", 1840, authorDao.findById(1), "There is a very bad book", Language.Ukraine));
-        bookList.add(new Book(2, "Lord of the rings", 1948, authorDao.findById(2), "Lord of the rings, you should read this book", Language.English));
-        bookList.add(new Book(3, "Dark elf", 1988, authorDao.findById(3), "Dark elf, this book about drou", Language.Russian));
+        bookList.add(new Book(1, "Kobzar", 1840, authorDao.findById(1), "There is a very bad book", languageDao.findById(1)));
+        bookList.add(new Book(2, "Lord of the rings", 1948, authorDao.findById(2), "Lord of the rings, you should read this book", languageDao.findById(3)));
+        bookList.add(new Book(3, "Dark elf", 1988, authorDao.findById(3), "Dark elf, this book about drou", languageDao.findById(2)));
         BookDao bookDao = new BookDao(bookList);
 
-        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, new BookConverter(authorDao, integerConverter), new BookValidator());
+        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao,new BookConverter(authorDao, languageDao, integerConverter), new BookValidator());
         AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator(), new AuthorToDtoConverter());
+        LanguageController languageController = new LanguageController(languageDao, new LanguageConverter(), new LanguageValidator());
 
         componentMap.put(bookLibraryController.getClass(), bookLibraryController);
         componentMap.put(authorController.getClass(), authorController);
+        componentMap.put(languageController.getClass(), languageController);
     }
 
     public <T> T getComponent(Class<T> type) {

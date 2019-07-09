@@ -26,9 +26,6 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() {
-//        BookLibraryController bookLibraryController = initializer.getComponent(BookLibraryController.class);
-//        AuthorController authorController = initializer.getComponent(AuthorController.class);
-//
         List<Controller> controllers = initializer.getComponentList(Controller.class);
 
         fillGetMapper(controllers);

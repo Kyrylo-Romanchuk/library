@@ -6,7 +6,7 @@ public class Book implements Comparable {
     private Integer year;
     private Author author;
     private String info;
-    private Enum language;
+    private Language language;
 
     @Override
     public int compareTo(Object o) {
@@ -16,7 +16,7 @@ public class Book implements Comparable {
     public Book() {
     }
 
-    public Book(Integer id, String name, Integer year, Author author, String info, Enum language) {
+    public Book(Integer id, String name, Integer year, Author author, String info, Language language) {
         this.id = id;
         this.name = name;
         this.year = year;
@@ -57,11 +57,11 @@ public class Book implements Comparable {
         this.info = info;
     }
 
-    public Enum getLanguage() {
+    public Language getLanguage() {
         return language;
     }
 
-    public void setLanguage(Enum language) {
+    public void setLanguage(Language language) {
         this.language = language;
     }
 

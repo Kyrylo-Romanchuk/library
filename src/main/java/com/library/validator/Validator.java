@@ -1,5 +1,5 @@
 package com.library.validator;
 
-public interface Validator<T, R> {
-    R validate(T t);
+public interface Validator<T> {
+    ValidationResult validate(T t);
 }

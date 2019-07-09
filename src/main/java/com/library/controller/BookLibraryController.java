@@ -5,8 +5,8 @@ import com.library.component.annotation.PostMapping;
 import com.library.data.converter.Converter;
 import com.library.data.dao.AuthorDao;
 import com.library.data.dao.BookDao;
+import com.library.data.dao.LanguageDao;
 import com.library.data.model.Book;
-import com.library.data.model.Language;
 import com.library.validator.ValidationResult;
 import com.library.validator.Validator;
 
@@ -16,14 +16,16 @@ public class BookLibraryController implements Controller {
     private final BookDao bookDao;
     private final Converter<HttpServletRequest, Book> bookConverter;
     private final AuthorDao authorDao;
-    private final Validator<Book, ValidationResult> bookValidator;
+    private final LanguageDao languageDao;
+    private final Validator<Book> bookValidator;
 
-    public BookLibraryController(BookDao bookDao, AuthorDao authorDao,
+    public BookLibraryController(BookDao bookDao, AuthorDao authorDao, LanguageDao languageDao,
                                  Converter<HttpServletRequest, Book> bookConverter,
-                                 Validator<Book, ValidationResult> bookValidator) {
+                                 Validator<Book> bookValidator) {
         this.bookDao = bookDao;
         this.bookConverter = bookConverter;
         this.authorDao = authorDao;
+        this.languageDao = languageDao;
         this.bookValidator = bookValidator;
     }
 
@@ -35,7 +37,7 @@ public class BookLibraryController implements Controller {
 
     @GetMapping("/books/add")
     public String showAddNewBook(HttpServletRequest request) {
-        request.setAttribute("languages", Language.values());
+        request.setAttribute("languages", languageDao.getAll());
         request.setAttribute("authors", authorDao.getAll());
         return "/books/bookAdd.jsp";
     }
@@ -44,7 +46,7 @@ public class BookLibraryController implements Controller {
     public String addNewBook(HttpServletRequest request) {
         Book book = bookConverter.convert(request);
         ValidationResult validationResult = bookValidator.validate(book);
-        if (validationResult.getResultMap().size() == 0) {
+        if (validationResult.getResultMap().isEmpty()) {
             bookDao.add(book);
             return "redirect:/books";
         } else {

@@ -1,6 +1,7 @@
 package com.library.data.converter;
 
 import com.library.data.dao.AuthorDao;
+import com.library.data.dao.LanguageDao;
 import com.library.data.model.Author;
 import com.library.data.model.Book;
 import com.library.data.model.Language;
@@ -25,21 +26,28 @@ public class BookConverterTest {
     private AuthorDao authorDao;
 
     @Mock
+    private LanguageDao languageDao;
+
+    @Mock
     private IntegerConverter integerConverter;
 
     @Mock
     private Author author;
 
+    @Mock
+    private Language language;
+
     @Test
     public void convert() throws ParseException {
-        BookConverter bookConverter = new BookConverter(authorDao, integerConverter);
+        BookConverter bookConverter = new BookConverter(authorDao, languageDao, integerConverter);
 
         when(authorDao.findById(1)).thenReturn(author);
+        when(languageDao.findById(1)).thenReturn(language);
         when(httpServletRequest.getParameter("bookName")).thenReturn("test");
         when(httpServletRequest.getParameter("bookYear")).thenReturn("1990");
         when(httpServletRequest.getParameter("bookAuthor")).thenReturn("1");
         when(httpServletRequest.getParameter("bookInfo")).thenReturn("there is a test book");
-        when(httpServletRequest.getParameter("bookLanguage")).thenReturn("English");
+        when(httpServletRequest.getParameter("bookLanguage")).thenReturn("1");
         when(integerConverter.convert("1990")).thenReturn(1990);
         when(integerConverter.convert("1")).thenReturn(1);
 
@@ -49,6 +57,6 @@ public class BookConverterTest {
         assertEquals(book.getYear().intValue(), 1990);
         assertEquals(book.getAuthor(), author);
         assertEquals(book.getInfo(), "there is a test book");
-        assertEquals(book.getLanguage(), Language.English);
+        assertEquals(book.getLanguage(), language);
     }
 }

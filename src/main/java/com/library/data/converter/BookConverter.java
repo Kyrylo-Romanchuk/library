@@ -1,17 +1,19 @@
 package com.library.data.converter;
 
 import com.library.data.dao.AuthorDao;
+import com.library.data.dao.LanguageDao;
 import com.library.data.model.Book;
-import com.library.data.model.Language;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class BookConverter implements Converter<HttpServletRequest, Book> {
     private AuthorDao authorDao;
+    private LanguageDao languageDao;
     private IntegerConverter integerConverter;
 
-    public BookConverter(AuthorDao authorDao, IntegerConverter integerConverter) {
+    public BookConverter(AuthorDao authorDao, LanguageDao languageDao, IntegerConverter integerConverter) {
         this.authorDao = authorDao;
+        this.languageDao = languageDao;
         this.integerConverter = integerConverter;
     }
 
@@ -23,7 +25,8 @@ public class BookConverter implements Converter<HttpServletRequest, Book> {
         Integer id = integerConverter.convert(request.getParameter("bookAuthor"));
         book.setAuthor(authorDao.findById(id));
         book.setInfo(request.getParameter("bookInfo"));
-        book.setLanguage(Language.valueOf(request.getParameter("bookLanguage")));
+        Integer languageId = integerConverter.convert(request.getParameter("bookLanguage"));
+        book.setLanguage(languageDao.findById(languageId));
         return book;
     }
 }

@@ -2,7 +2,7 @@ package com.library.validator;
 
 import com.library.data.model.Book;
 
-public class BookValidator implements Validator<Book, ValidationResult> {
+public class BookValidator implements Validator<Book> {
     @Override
     public ValidationResult validate(Book book) {
         ValidationResult validationResult = new ValidationResult();

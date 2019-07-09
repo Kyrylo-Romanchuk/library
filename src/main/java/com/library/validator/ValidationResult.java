@@ -21,4 +21,8 @@ public class ValidationResult {
     public String getError(String key) {
         return validationMap.get(key);
     }
+
+    public boolean isSuccess (){
+        return validationMap.isEmpty();
+    }
 }

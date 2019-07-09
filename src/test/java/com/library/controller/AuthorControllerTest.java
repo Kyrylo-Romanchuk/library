@@ -40,7 +40,7 @@ public class AuthorControllerTest {
     private AuthorConverter authorConverter;
 
     @Mock
-    private Validator<Author, ValidationResult> authorValidator;
+    private Validator<Author> authorValidator;
 
     @Mock
     private AuthorToDtoConverter authorToDtoConverter;

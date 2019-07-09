@@ -20,6 +20,9 @@ public class BookValidatorTest {
     @Mock
     private Author author;
 
+    @Mock
+    private Language language;
+
     private BookValidator bookValidator = new BookValidator();
 
     @Test
@@ -28,7 +31,7 @@ public class BookValidatorTest {
         when(book.getYear()).thenReturn(1990);
         when(book.getAuthor()).thenReturn(author);
         when(book.getInfo()).thenReturn("this is test book");
-        when(book.getLanguage()).thenReturn(Language.English);
+        when(book.getLanguage()).thenReturn(language);
 
         assertEquals(0, bookValidator.validate(book).getResultMap().size());
 
