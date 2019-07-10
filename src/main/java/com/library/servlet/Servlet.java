@@ -27,9 +27,7 @@ public class Servlet extends HttpServlet {
     @Override
     public void init() {
         List<Controller> controllers = initializer.getComponentList(Controller.class);
-
-        fillGetMapper(controllers);
-        fillPostMapper(controllers);
+        fillMappers(controllers);
     }
 
     @Override
@@ -60,28 +58,28 @@ public class Servlet extends HttpServlet {
         }
     }
 
-    private void fillGetMapper(List<Controller> controllers) {
-        for (Object controller : controllers) {
+    private void fillMappers(List<Controller> controllers) {
+        for (Controller controller : controllers) {
             Method[] methods = controller.getClass().getMethods();
             for (Method method : methods) {
-                GetMapping annotation = method.getAnnotation(GetMapping.class);
-                if (annotation != null) {
-                    String url = annotation.value();
-                    getMapper.put(url, invokeController(controller, method));
-                }
+                fillGetMapper(method, controller);
+                fillPostMapper(method, controller);
             }
         }
     }
 
-    private void fillPostMapper(List<Controller> controllers) {
-        for (Object controller : controllers) {
-            Method[] methods = controller.getClass().getMethods();
-            for (Method method : methods) {
-                PostMapping annotation = method.getAnnotation(PostMapping.class);
-                if (annotation != null) {
-                    postMapper.put(annotation.value(), invokeController(controller, method));
-                }
-            }
+    private void fillGetMapper(Method method, Controller controller) {
+        GetMapping annotation = method.getAnnotation(GetMapping.class);
+        if (annotation != null) {
+            String url = annotation.value();
+            getMapper.put(url, invokeController(controller, method));
+        }
+    }
+
+    private void fillPostMapper(Method method, Controller controller) {
+        PostMapping annotation = method.getAnnotation(PostMapping.class);
+        if (annotation != null) {
+            postMapper.put(annotation.value(), invokeController(controller, method));
         }
     }
 
