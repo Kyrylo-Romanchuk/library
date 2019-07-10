@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 @WebFilter("/*")
 public class UrlFilter implements Filter {
-
     private final String[] values = {"/library/.*", "/", "/static/.*"};
 
     @Override

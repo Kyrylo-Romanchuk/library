@@ -5,7 +5,6 @@ import com.library.data.model.Author;
 import javax.servlet.http.HttpServletRequest;
 
 public class AuthorConverter implements Converter<HttpServletRequest, Author> {
-
     private final DateConverter dateConverter;
 
     public AuthorConverter(DateConverter dateConverter) {

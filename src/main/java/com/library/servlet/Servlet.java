@@ -19,10 +19,9 @@ import java.util.function.Function;
 
 @WebServlet("/library/*")
 public class Servlet extends HttpServlet {
-
-    private Map<String, Function<HttpServletRequest, String>> getMapper = new HashMap<>();
-    private Map<String, Function<HttpServletRequest, String>> postMapper = new HashMap<>();
-    private Initializer initializer = new Initializer();
+    private final Map<String, Function<HttpServletRequest, String>> getMapper = new HashMap<>();
+    private final Map<String, Function<HttpServletRequest, String>> postMapper = new HashMap<>();
+    private final Initializer initializer = new Initializer();
 
     @Override
     public void init() {

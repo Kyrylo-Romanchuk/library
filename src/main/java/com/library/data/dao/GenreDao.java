@@ -5,7 +5,6 @@ import com.library.data.model.Genre;
 import java.util.List;
 
 public class GenreDao implements CommonDao<Genre> {
-
     private List<Genre> genres;
 
     public GenreDao(List<Genre> genres) {

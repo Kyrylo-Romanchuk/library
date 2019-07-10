@@ -56,7 +56,7 @@ public class Initializer {
         BookDao bookDao = new BookDao(bookList);
 
         BookConverter bookConverter = new BookConverter(authorDao, languageDao, genreDao, integerConverter);
-        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao, genreDao, bookConverter, new AuthorToDtoConverter(),new BookValidator());
+        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao, genreDao, bookConverter, new AuthorToDtoConverter(), new BookValidator());
         AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator(), new AuthorToDtoConverter());
         LanguageController languageController = new LanguageController(languageDao, new LanguageConverter(), new LanguageValidator());
         GenreController genreController = new GenreController(genreDao, new GenreConverter(), new GenreValidator());
