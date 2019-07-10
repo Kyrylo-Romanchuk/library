@@ -44,14 +44,14 @@ public class AuthorController implements Controller {
     public String addAuthor(HttpServletRequest request) {
         Author author = authorConverter.convert(request);
         ValidationResult validationResult = authorValidator.validate(author);
-        if (validationResult.getResultMap().isEmpty()) {
+        if (validationResult.isSuccess()) {
             authorDao.add(author);
             return "redirect:/authors";
         } else {
             request.setAttribute("validationResult", validationResult);
             request.setAttribute("author", author);
             return showAddAuthor(request);
-//            return "redirect:/authors/add";
+            // TODO: 7/10/2019 redirect return "redirect:/authors/add";
         }
     }
 }

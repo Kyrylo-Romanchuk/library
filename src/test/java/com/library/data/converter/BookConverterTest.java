@@ -1,6 +1,7 @@
 package com.library.data.converter;
 
 import com.library.data.dao.AuthorDao;
+import com.library.data.dao.GenreDao;
 import com.library.data.dao.LanguageDao;
 import com.library.data.model.Author;
 import com.library.data.model.Book;
@@ -29,6 +30,9 @@ public class BookConverterTest {
     private LanguageDao languageDao;
 
     @Mock
+    private GenreDao genreDao;
+
+    @Mock
     private IntegerConverter integerConverter;
 
     @Mock
@@ -39,7 +43,7 @@ public class BookConverterTest {
 
     @Test
     public void convert() throws ParseException {
-        BookConverter bookConverter = new BookConverter(authorDao, languageDao, integerConverter);
+        BookConverter bookConverter = new BookConverter(authorDao, languageDao, genreDao, integerConverter);
 
         when(authorDao.findById(1)).thenReturn(author);
         when(languageDao.findById(1)).thenReturn(language);

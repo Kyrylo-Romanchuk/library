@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -38,7 +37,7 @@ public class LanguageControllerTest {
     private HttpServletRequest request;
 
     @Mock
-    List<Language> languagesList;
+    private List<Language> languagesList;
 
     @Mock
     private ValidationResult validationResult;
@@ -61,7 +60,7 @@ public class LanguageControllerTest {
     @Test
     public void add() {
         when(languageConverter.convert(request)).thenReturn(language);
-        when(languageValidator.validate(language)).thenReturn(validationResult);
+        when(languageValidator.validate(language)).thenReturn(new ValidationResult());
         assertEquals("redirect:/languages", languageController.add(request));
         verify(languageDao).add(language);
     }

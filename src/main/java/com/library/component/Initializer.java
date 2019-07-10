@@ -50,12 +50,13 @@ public class Initializer {
         GenreDao genreDao = new GenreDao(genres);
 
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book(1, "Kobzar", 1840, authorDao.findById(1), "There is a very bad book", languageDao.findById(1)));
-        bookList.add(new Book(2, "Lord of the rings", 1948, authorDao.findById(2), "Lord of the rings, you should read this book", languageDao.findById(3)));
-        bookList.add(new Book(3, "Dark elf", 1988, authorDao.findById(3), "Dark elf, this book about drou", languageDao.findById(2)));
+        bookList.add(new Book(1, "Kobzar", 1840, authorDao.findById(1), "There is a very bad book", languageDao.findById(1), genres));
+        bookList.add(new Book(2, "Lord of the rings", 1948, authorDao.findById(2), "Lord of the rings, you should read this book", languageDao.findById(3), genres));
+        bookList.add(new Book(3, "Dark elf", 1988, authorDao.findById(3), "Dark elf, this book about drou", languageDao.findById(2), genres));
         BookDao bookDao = new BookDao(bookList);
 
-        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao,new BookConverter(authorDao, languageDao, integerConverter), new BookValidator());
+        BookConverter bookConverter = new BookConverter(authorDao, languageDao, genreDao, integerConverter);
+        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao, genreDao, bookConverter, new AuthorToDtoConverter(),new BookValidator());
         AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator(), new AuthorToDtoConverter());
         LanguageController languageController = new LanguageController(languageDao, new LanguageConverter(), new LanguageValidator());
         GenreController genreController = new GenreController(genreDao, new GenreConverter(), new GenreValidator());

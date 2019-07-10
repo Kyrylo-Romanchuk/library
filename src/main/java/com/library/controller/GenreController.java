@@ -36,14 +36,14 @@ public class GenreController implements Controller {
     public String add(HttpServletRequest request) {
         Genre genre = genreConverter.convert(request);
         ValidationResult validationResult = genreValidator.validate(genre);
-        if (validationResult.getResultMap().isEmpty()) {
+        if (validationResult.isSuccess()) {
             genreDao.add(genre);
             return "redirect:/genres";
         } else {
             request.setAttribute("validationResult", validationResult);
             request.setAttribute("genre", genre);
             return showAddGenre(request);
-//            return "redirect:/languages/add";
+            // TODO: 7/10/2019 redirect  return "redirect:/languages/add";
         }
     }
 }

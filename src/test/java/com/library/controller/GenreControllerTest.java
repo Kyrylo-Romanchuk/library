@@ -3,11 +3,11 @@ package com.library.controller;
 import com.library.data.converter.GenreConverter;
 import com.library.data.dao.GenreDao;
 import com.library.data.model.Genre;
-import com.library.validator.GenreValidator;
 import com.library.validator.ValidationResult;
+import com.library.validator.Validator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -34,16 +34,17 @@ public class GenreControllerTest {
     private GenreConverter genreConverter;
 
     @Mock
-    private GenreValidator genreValidator;
+    private Validator<Genre> genreValidator;
 
     @Mock
     private HttpServletRequest request;
 
-    @Mock
-    private ValidationResult validationResult;
-
-    @InjectMocks
     private GenreController genreController;
+
+    @Before
+    public void init() {
+        genreController = new GenreController(genreDao, genreConverter, genreValidator);
+    }
 
     @Test
     public void showGenreList() {
@@ -60,7 +61,7 @@ public class GenreControllerTest {
     @Test
     public void add() {
         when(genreConverter.convert(request)).thenReturn(genre);
-        when(genreValidator.validate(genre)).thenReturn(validationResult);
+        when(genreValidator.validate(genre)).thenReturn(new ValidationResult());
         assertEquals("redirect:/genres", genreController.add(request));
         verify(genreDao).add(genre);
     }

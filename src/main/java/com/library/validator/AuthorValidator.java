@@ -10,12 +10,12 @@ public class AuthorValidator implements Validator<Author> {
         ValidationResult validationResult = new ValidationResult();
 
         String firstName = author.getFirstName();
-        if (ValidationUtility.stringIsEmpty(firstName) || !ValidationUtility.stringWithoutNumbers(firstName)) {
+        if (ValidationUtility.stringIsEmpty(firstName) || ValidationUtility.stringNotOnlyLetters(firstName)) {
             validationResult.add("firstName", "please enter the first name");
         }
 
         String lastName = author.getLastName();
-        if (ValidationUtility.stringIsEmpty(lastName) || !ValidationUtility.stringWithoutNumbers(lastName)) {
+        if (ValidationUtility.stringIsEmpty(lastName) || ValidationUtility.stringNotOnlyLetters(lastName)) {
             validationResult.add("lastName", "please enter the last name");
         }
 

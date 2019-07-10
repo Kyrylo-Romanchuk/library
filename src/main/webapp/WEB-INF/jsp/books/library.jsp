@@ -10,6 +10,7 @@
             <th>Author</th>
             <th>Info</th>
             <th>Language</th>
+            <th>Genres</th>
         </tr>
         </thead>
 
@@ -17,9 +18,11 @@
             <tr>
                 <td>${book.getName()}</td>
                 <td>${book.getYear()}</td>
-                <td>${book.getAuthor().getFullName()}</td>
+<%--                to do change when will be add bookDto (getFullName())--%>
+                <td>${book.getAuthor().getFirstName()}</td>
                 <td>${book.getInfo()}</td>
-                <td>${book.getLanguage()}</td>
+                <td>${book.getLanguage().getName()}</td>
+                <td>${book.getGenresString()}</td>
             </tr>
         </c:forEach>
     </table>

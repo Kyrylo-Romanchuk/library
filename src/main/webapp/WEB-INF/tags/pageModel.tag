@@ -6,7 +6,7 @@
 <%@ attribute name="errorMessage" %>
 <%@ attribute name="datePicker" type="java.lang.Boolean" %>
 
-<c:set var="base" value="${pageContext.request.contextPath}" scope="application"></c:set>
+<c:set var="base" value="${pageContext.request.contextPath}" scope="application"/>
 
 <html>
 <head>

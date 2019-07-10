@@ -3,7 +3,7 @@
 
 <tag:pageModel title="New genre" errorMessage="${error}">
     <div class="text-center">
-        <form class="justify-content-center" method="post" action="${pageContext.request.contextPath}/genres/add">
+        <form class="justify-content-center" method="post" action="${base}/genres/add">
             <div class="container col-md-6">
                 <div class="form-group text-center">
                     <label for="name">Name</label>

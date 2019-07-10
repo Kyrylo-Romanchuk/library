@@ -2,9 +2,6 @@ package com.library.validator;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.Assert.*;
 
 public class ValidationResultTest {
@@ -14,13 +11,7 @@ public class ValidationResultTest {
     @Test
     public void add() {
         validationResult.add("result", "test result");
-        assertEquals(1, validationResult.getResultMap().size());
-    }
-
-    @Test
-    public void getResultMap() {
-        Map<String, String> expectedMap = new HashMap<>();
-        assertEquals(expectedMap, validationResult.getResultMap());
+        assertFalse(validationResult.isSuccess());
     }
 
     @Test

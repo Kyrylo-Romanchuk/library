@@ -70,7 +70,4 @@ public class Author {
         this.dieDay = dieDay;
     }
 
-    public String getFullName (){
-        return String.format("%s %s", firstName, lastName);
-    }
 }

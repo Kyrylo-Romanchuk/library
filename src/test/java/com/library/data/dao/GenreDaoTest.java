@@ -3,23 +3,20 @@ package com.library.data.dao;
 import com.library.data.model.Genre;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
 public class GenreDaoTest {
 
     private List<Genre> genreList;
     private GenreDao genreDao;
 
     @Before
-    public void init (){
+    public void init() {
         genreList = new ArrayList<>();
         genreList.add(new Genre(1, "Classic"));
         genreList.add(new Genre(2, "Drama"));

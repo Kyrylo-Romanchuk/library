@@ -4,7 +4,7 @@
 
 <tag:pageModel title="New author" errorMessage="${error}" datePicker="true">
     <div class="text-center">
-        <form class="justify-content-center" method="post" action="${pageContext.request.contextPath}/authors/add">
+        <form class="justify-content-center" method="post" action="${base}/authors/add">
             <div class="container col-md-6">
                 <div class="form-group text-center">
                     <label for="firstName">First name</label>
