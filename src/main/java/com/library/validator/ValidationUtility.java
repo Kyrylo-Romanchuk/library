@@ -1,15 +1,15 @@
 package com.library.validator;
 
 public class ValidationUtility {
-    public static boolean stringIsEmpty(String string) {
+    public static boolean isEmpty(String string) {
         return string == null || string.matches("\\s*");
     }
 
-    public static boolean integerIsEmpty(Integer integer) {
+    public static boolean isEmpty(Integer integer) {
         return integer == null;
     }
 
-    public static boolean objectIsEmpty(Object object) {
+    public static boolean isEmpty(Object object) {
         return object == null;
     }
 

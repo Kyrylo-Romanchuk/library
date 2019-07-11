@@ -8,6 +8,7 @@ import com.library.data.dao.BookDao;
 import com.library.data.dao.GenreDao;
 import com.library.data.dao.LanguageDao;
 import com.library.data.dto.AuthorDto;
+import com.library.data.dto.BookDto;
 import com.library.data.model.Author;
 import com.library.data.model.Book;
 import com.library.validator.ValidationResult;
@@ -23,19 +24,23 @@ public class BookLibraryController implements Controller {
     private final GenreDao genreDao;
     private final Converter<HttpServletRequest, Book> bookConverter;
     private final Converter<Author, AuthorDto> authorAuthorDtoConverter;
+    private final Converter<Book, BookDto> bookBookDtoConverter;
+    private final Converter<String, Integer> integerConverter;
     private final Validator<Book> bookValidator;
 
     public BookLibraryController(BookDao bookDao, AuthorDao authorDao,
                                  LanguageDao languageDao, GenreDao genreDao,
                                  Converter<HttpServletRequest, Book> bookConverter,
                                  Converter<Author, AuthorDto> authorAuthorDtoConverter,
-                                 Validator<Book> bookValidator) {
+                                 Converter<Book, BookDto> bookBookDtoConverter, Converter<String, Integer> integerConverter, Validator<Book> bookValidator) {
         this.bookDao = bookDao;
         this.authorDao = authorDao;
         this.languageDao = languageDao;
         this.genreDao = genreDao;
         this.bookConverter = bookConverter;
         this.authorAuthorDtoConverter = authorAuthorDtoConverter;
+        this.bookBookDtoConverter = bookBookDtoConverter;
+        this.integerConverter = integerConverter;
         this.bookValidator = bookValidator;
     }
 
@@ -48,9 +53,17 @@ public class BookLibraryController implements Controller {
     @GetMapping("/books/add")
     public String showAddNewBook(HttpServletRequest request) {
         request.setAttribute("languages", languageDao.getAll());
+        authorAuthorDtoConverter.convert(authorDao.getAll());
         request.setAttribute("authors", authorDao.getAll().stream().map(authorAuthorDtoConverter::convert).collect(Collectors.toList()));
         request.setAttribute("genres", genreDao.getAll());
         return "/books/bookAdd.jsp";
+    }
+
+    @GetMapping("/books/edit")
+    public String bookEdit(HttpServletRequest request) {
+        Integer id = integerConverter.convert(request.getParameter("id"));
+        request.setAttribute("book", bookDao.findById(id));
+        return showAddNewBook(request);
     }
 
     @PostMapping("/books/add")
@@ -58,7 +71,7 @@ public class BookLibraryController implements Controller {
         Book book = bookConverter.convert(request);
         ValidationResult validationResult = bookValidator.validate(book);
         if (validationResult.isSuccess()) {
-            bookDao.add(book);
+            bookDao.save(book);
             return "redirect:/books";
         } else {
             request.setAttribute("validationResult", validationResult);
@@ -66,5 +79,12 @@ public class BookLibraryController implements Controller {
             return showAddNewBook(request);
             // TODO: 7/10/2019 redirect return "redirect:/books/add";
         }
+    }
+
+    @PostMapping("/books/delete")
+    public String deleteBook(HttpServletRequest request) {
+        Integer id = integerConverter.convert(request.getParameter("id"));
+        bookDao.delete(id);
+        return "redirect:/books";
     }
 }

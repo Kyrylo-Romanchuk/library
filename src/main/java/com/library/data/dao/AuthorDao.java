@@ -26,7 +26,7 @@ public class AuthorDao implements CommonDao<Author> {
     }
 
     @Override
-    public Author findById(int id) {
-        return authors.stream().filter(author -> id == author.getId()).findFirst().orElse(null);
+    public Author findById(Integer id) {
+        return authors.stream().filter(author -> author.getId().equals(id)).findFirst().orElse(null);
     }
 }

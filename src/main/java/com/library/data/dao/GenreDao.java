@@ -26,7 +26,7 @@ public class GenreDao implements CommonDao<Genre> {
     }
 
     @Override
-    public Genre findById(int id) {
-        return genres.stream().filter(genre -> genre.getId() == id).findFirst().orElse(null);
+    public Genre findById(Integer id) {
+        return genres.stream().filter(genre -> genre.getId().equals(id)).findFirst().orElse(null);
     }
 }

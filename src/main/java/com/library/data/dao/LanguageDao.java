@@ -26,7 +26,7 @@ public class LanguageDao implements CommonDao<Language> {
     }
 
     @Override
-    public Language findById(int id) {
-        return languages.stream().filter(language_new -> id == language_new.getId()).findFirst().orElse(null);
+    public Language findById(Integer id) {
+        return languages.stream().filter(language_new -> language_new.getId().equals(id)).findFirst().orElse(null);
     }
 }

@@ -28,6 +28,7 @@ public class BookConverter implements Converter<HttpServletRequest, Book> {
     @Override
     public Book convert(HttpServletRequest request) {
         Book book = new Book();
+        book.setId(integerConverter.convert(request.getParameter("id")));
         book.setName(request.getParameter("bookName"));
         book.setYear(integerConverter.convert(request.getParameter("bookYear")));
         Integer id = integerConverter.convert(request.getParameter("bookAuthor"));

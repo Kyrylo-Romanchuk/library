@@ -1,31 +1,15 @@
 package com.library.validator;
 
+import com.library.data.model.Author;
 import com.library.data.model.Book;
+import com.library.data.model.Language;
 
-public class BookValidator implements Validator<Book> {
-    @Override
-    public ValidationResult validate(Book book) {
-        ValidationResult validationResult = new ValidationResult();
-
-        if (ValidationUtility.stringIsEmpty(book.getName())) {
-            validationResult.add("name", "you must enter the book name");
-        }
-
-        if (ValidationUtility.stringIsEmpty(book.getInfo())) {
-            validationResult.add("info", "you must enter the book info");
-        }
-
-        if (ValidationUtility.integerIsEmpty(book.getYear())) {
-            validationResult.add("year", "entered year is not correct (format: 'yyyy') ");
-        }
-
-        if (ValidationUtility.objectIsEmpty(book.getAuthor())) {
-            validationResult.add("author", "please choose the book author");
-        }
-
-        if (ValidationUtility.objectIsEmpty(book.getLanguage())) {
-            validationResult.add("name", "please choose the book language");
-        }
-        return validationResult;
+public class BookValidator extends AbstractValidator<Book> {
+    public BookValidator() {
+        validations.add(new ValidationRegistry<Book, String>("name", Book::getName, ValidationUtility::isEmpty, "Please, enter the name"));
+        validations.add(new ValidationRegistry<Book, String>("info", Book::getInfo, ValidationUtility::isEmpty, "Please, enter the info"));
+        validations.add(new ValidationRegistry<Book, Integer>("year", Book::getYear, ValidationUtility::isEmpty, "Entered year is not correct (format: 'yyyy')"));
+        validations.add(new ValidationRegistry<Book, Author>("info", Book::getAuthor, ValidationUtility::isEmpty, "Please, choose the author"));
+        validations.add(new ValidationRegistry<Book, Language>("info", Book::getLanguage, ValidationUtility::isEmpty, "Please, choose the language"));
     }
 }

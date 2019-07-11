@@ -10,7 +10,6 @@ import com.library.validator.ValidationResult;
 import com.library.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.stream.Collectors;
 
 public class AuthorController implements Controller {
     private final AuthorDao authorDao;
@@ -29,9 +28,7 @@ public class AuthorController implements Controller {
 
     @GetMapping("/authors")
     public String showAuthorList(HttpServletRequest request) {
-        request.setAttribute("authors", authorDao.getAll().stream()
-                .map(authorToDtoConverter::convert)
-                .collect(Collectors.toList()));
+        request.setAttribute("authors", authorToDtoConverter.convert(authorDao.getAll()));
         return "/authors/authorsList.jsp";
     }
 

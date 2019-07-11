@@ -4,29 +4,13 @@ import com.library.data.model.Author;
 
 import java.util.Date;
 
-public class AuthorValidator implements Validator<Author> {
-    @Override
-    public ValidationResult validate(Author author) {
-        ValidationResult validationResult = new ValidationResult();
-
-        String firstName = author.getFirstName();
-        if (ValidationUtility.stringIsEmpty(firstName) || ValidationUtility.stringNotOnlyLetters(firstName)) {
-            validationResult.add("firstName", "please enter the first name");
-        }
-
-        String lastName = author.getLastName();
-        if (ValidationUtility.stringIsEmpty(lastName) || ValidationUtility.stringNotOnlyLetters(lastName)) {
-            validationResult.add("lastName", "please enter the last name");
-        }
-
-        if (ValidationUtility.stringIsEmpty(author.getBiography())) {
-            validationResult.add("biography", "please enter the author biography");
-        }
-
-        Date birthDay = author.getBirthDay();
-        if (ValidationUtility.objectIsEmpty(birthDay) || birthDay.after(new Date())) {
-            validationResult.add("birthDay", "please enter author birthday");
-        }
-        return validationResult;
+public class AuthorValidator extends AbstractValidator<Author> {
+    public AuthorValidator() {
+        validations.add(new ValidationRegistry<Author, String>("firstName", Author::getFirstName, ValidationUtility::isEmpty, "please enter the first name"));
+        validations.add(new ValidationRegistry<Author, String>("firstName", Author::getFirstName, ValidationUtility::stringNotOnlyLetters, "first name should contain letters only"));
+        validations.add(new ValidationRegistry<Author, String>("lastName", Author::getLastName, ValidationUtility::isEmpty, "please enter the last name"));
+        validations.add(new ValidationRegistry<Author, String>("lastName", Author::getLastName, ValidationUtility::stringNotOnlyLetters, "last name should contain letters only"));
+        validations.add(new ValidationRegistry<Author, String>("biography", Author::getBiography, ValidationUtility::isEmpty, "please enter the author biography"));
+        validations.add(new ValidationRegistry<Author, Date>("birthDay", Author::getBirthDay, ValidationUtility::isEmpty, "please enter author birthday"));
     }
 }

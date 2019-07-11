@@ -4,6 +4,7 @@
 <tag:pageModel title="New book" errorMessage="${error}">
     <div class="text-center">
         <form class="justify-content-center" method="post" action="${base}/books/add">
+            <input type="hidden" name="id" value="${book.getId()}">
             <div class="container col-md-5">
                 <div class="form-group text-center">
 
@@ -97,7 +98,7 @@
             </div>
 
             <div class="text-center">
-                <button class="btn btn-lg btn-primary" type="submit">Add book</button>
+                <button class="btn btn-lg btn-primary" type="submit">Save</button>
             </div>
         </form>
     </div>

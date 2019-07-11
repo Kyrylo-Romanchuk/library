@@ -7,5 +7,5 @@ public interface CommonDao<T> {
 
     List<T> getAll();
 
-    T findById(int id);
+    T findById(Integer id);
 }

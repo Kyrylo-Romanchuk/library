@@ -11,6 +11,7 @@
             <th>Info</th>
             <th>Language</th>
             <th>Genres</th>
+            <th>Actions</th>
         </tr>
         </thead>
 
@@ -18,11 +19,15 @@
             <tr>
                 <td>${book.getName()}</td>
                 <td>${book.getYear()}</td>
-<%--                to do change when will be add bookDto (getFullName())--%>
+                    <%--                to do change when will be add bookDto (getFullName())--%>
                 <td>${book.getAuthor().getFirstName()}</td>
                 <td>${book.getInfo()}</td>
                 <td>${book.getLanguage().getName()}</td>
                 <td>${book.getGenresString()}</td>
+                <td>
+                    <tag:actionButton method="post" url="${base}/books/delete" id="${book.getId()}">delete</tag:actionButton>
+                    <tag:actionButton method="get" url="${base}/books/edit" id="${book.getId()}">edit</tag:actionButton>
+                </td>
             </tr>
         </c:forEach>
     </table>
@@ -30,7 +35,7 @@
         <button class="btn navbar-light" data-toggle="dropdown" style="padding: .2rem;">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="dropdown-menu dropdown-menu-right" >
+        <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="${base}/books/add">Add</a>
         </div>
     </div>

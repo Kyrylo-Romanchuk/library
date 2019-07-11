@@ -2,18 +2,9 @@ package com.library.validator;
 
 import com.library.data.model.Language;
 
-public class LanguageValidator implements Validator<Language>{
-    @Override
-    public ValidationResult validate(Language language) {
-        ValidationResult validationResult = new ValidationResult();
-
-        if (ValidationUtility.stringIsEmpty(language.getName())) {
-            validationResult.add("name", "you must enter the language name");
-        }
-
-        if (ValidationUtility.stringIsEmpty(language.getShortName())) {
-            validationResult.add("shortName", "you must enter short name");
-        }
-        return validationResult;
+public class LanguageValidator extends AbstractValidator<Language> {
+    public LanguageValidator() {
+        validations.add(new ValidationRegistry<Language, String>("name", Language::getName, ValidationUtility::isEmpty, "Please, enter the name"));
+        validations.add(new ValidationRegistry<Language, String>("shortName", Language::getShortName, ValidationUtility::isEmpty, "Please, enter the short name"));
     }
 }

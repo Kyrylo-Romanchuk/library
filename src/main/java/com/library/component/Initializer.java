@@ -9,6 +9,7 @@ import com.library.data.dao.AuthorDao;
 import com.library.data.dao.BookDao;
 import com.library.data.dao.GenreDao;
 import com.library.data.dao.LanguageDao;
+import com.library.data.dto.BookDto;
 import com.library.data.model.Author;
 import com.library.data.model.Book;
 import com.library.data.model.Genre;
@@ -32,7 +33,7 @@ public class Initializer {
         List<Author> authorList = new ArrayList<>();
         authorList.add(new Author(1, "Taras", "Shevchenko", "very bad author", dateConverter.convert("03/09/1814"), dateConverter.convert("03/10/1861")));
         authorList.add(new Author(2, "John Ronald Reuel", "Tolkien", "so good author", dateConverter.convert("01/03/1892"), dateConverter.convert("09/02/1973")));
-        authorList.add(new Author(3, "Robert Anthony", "Salvatore", "dark elf", dateConverter.convert("01/20/1959"), dateConverter.convert(null)));
+        authorList.add(new Author(3, "Robert Anthony", "Salvatore", "dark elf", dateConverter.convert("01/20/1959"), dateConverter.convert("")));
 
         AuthorDao authorDao = new AuthorDao(authorList);
 
@@ -56,8 +57,10 @@ public class Initializer {
         BookDao bookDao = new BookDao(bookList);
 
         BookConverter bookConverter = new BookConverter(authorDao, languageDao, genreDao, integerConverter);
-        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao, genreDao, bookConverter, new AuthorToDtoConverter(), new BookValidator());
-        AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator(), new AuthorToDtoConverter());
+        AuthorToDtoConverter authorAuthorDtoConverter = new AuthorToDtoConverter();
+        Converter<Book, BookDto> bookBookDtoConverter = new BookToDtoConverter(authorAuthorDtoConverter);
+        BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao, genreDao, bookConverter, authorAuthorDtoConverter, bookBookDtoConverter, integerConverter, new BookValidator());
+        AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator(), authorAuthorDtoConverter);
         LanguageController languageController = new LanguageController(languageDao, new LanguageConverter(), new LanguageValidator());
         GenreController genreController = new GenreController(genreDao, new GenreConverter(), new GenreValidator());
 
