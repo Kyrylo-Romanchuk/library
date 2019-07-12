@@ -24,6 +24,9 @@ public class AuthorConverterTest {
     @Mock
     private DateConverter dateConverter;
 
+    @Mock
+    private IntegerConverter integerConverter;
+
     @InjectMocks
     private AuthorConverter authorConverter;
 

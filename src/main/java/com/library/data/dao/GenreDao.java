@@ -29,4 +29,18 @@ public class GenreDao implements CommonDao<Genre> {
     public Genre findById(Integer id) {
         return genres.stream().filter(genre -> genre.getId().equals(id)).findFirst().orElse(null);
     }
+
+    @Override
+    public void delete(Integer id) {
+        genres.remove(findById(id));
+    }
+
+    @Override
+    public void save(Genre genre) {
+        Genre foundGenre = findById(genre.getId());
+        if (foundGenre != null) {
+            delete(foundGenre.getId());
+        }
+        genres.add(genre);
+    }
 }

@@ -29,4 +29,18 @@ public class LanguageDao implements CommonDao<Language> {
     public Language findById(Integer id) {
         return languages.stream().filter(language_new -> language_new.getId().equals(id)).findFirst().orElse(null);
     }
+
+    @Override
+    public void delete(Integer id) {
+        languages.remove(findById(id));
+    }
+
+    @Override
+    public void save(Language language) {
+        Language foundLanguage = findById(language.getId());
+        if (foundLanguage != null) {
+            delete(foundLanguage.getId());
+        }
+        languages.add(language);
+    }
 }

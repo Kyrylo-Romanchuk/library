@@ -18,6 +18,9 @@ public class LanguageConverterTest {
     @Mock
     private HttpServletRequest request;
 
+    @Mock
+    private IntegerConverter integerConverter;
+
     @InjectMocks
     private LanguageConverter languageConverter;
 

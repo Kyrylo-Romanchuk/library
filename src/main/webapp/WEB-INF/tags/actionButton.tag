@@ -4,5 +4,7 @@
 
 <form method="${method}" action="${url}">
     <input type="hidden" name="id" value="${id}">
-    <button><jsp:doBody/></button>
+    <button class="btn btn-sm btn-dark">
+        <jsp:doBody/>
+    </button>
 </form>

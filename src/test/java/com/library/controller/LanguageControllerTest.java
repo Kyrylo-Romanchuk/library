@@ -62,6 +62,6 @@ public class LanguageControllerTest {
         when(languageConverter.convert(request)).thenReturn(language);
         when(languageValidator.validate(language)).thenReturn(new ValidationResult());
         assertEquals("redirect:/languages", languageController.add(request));
-        verify(languageDao).add(language);
+        verify(languageDao).save(language);
     }
 }

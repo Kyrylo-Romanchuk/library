@@ -49,12 +49,12 @@
 
                             <label for="bookLanguage">Book language</label>
                             <select class="form-select-button form-control" id="bookLanguage" name="bookLanguage">
-                                <c:forEach var="language" items="${languages}">
-                                    <c:if test="${book.getLanguage().getId() == language.getId()}">
-                                        <option selected value=${language.getId()}>${language.getName()}</option>
+                                <c:forEach var="genre" items="${languages}">
+                                    <c:if test="${book.getLanguage().getId() == genre.getId()}">
+                                        <option selected value=${genre.getId()}>${genre.getName()}</option>
                                     </c:if>
-                                    <c:if test="${book.getLanguage().getId() != language.getId()}">
-                                        <option value=${language.getId()}>${language.getName()}</option>
+                                    <c:if test="${book.getLanguage().getId() != genre.getId()}">
+                                        <option value=${genre.getId()}>${genre.getName()}</option>
                                     </c:if>
                                 </c:forEach>
                             </select>
@@ -89,17 +89,14 @@
                             <label for="bookInfo">Book info</label>
                             <textarea id="bookInfo" name="bookInfo" class="form-control"
                                       placeholder="Enter book info"
-                                      rows="8"
-                                      value="${book.getInfo()}"></textarea>
+                                      rows="8">${book.getInfo()}</textarea>
                             <tag:errorOnPage errorName="info"/>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="text-center">
-                <button class="btn btn-lg btn-primary" type="submit">Save</button>
-            </div>
+            <tag:actionSave/>
         </form>
     </div>
 </tag:pageModel>

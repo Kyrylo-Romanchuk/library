@@ -2,6 +2,7 @@ package com.library.controller;
 
 import com.library.data.converter.AuthorConverter;
 import com.library.data.converter.AuthorToDtoConverter;
+import com.library.data.converter.IntegerConverter;
 import com.library.data.dao.AuthorDao;
 import com.library.data.dto.AuthorDto;
 import com.library.data.model.Author;
@@ -65,7 +66,7 @@ public class AuthorControllerTest {
     public void addAuthor() {
         when(authorConverter.convert(request)).thenReturn(author);
         when(authorValidator.validate(author)).thenReturn(new ValidationResult());
-        assertEquals("redirect:/authors", authorController.addAuthor(request));
-        verify(authorDao).add(author);
+        assertEquals("redirect:/authors", authorController.add(request));
+        verify(authorDao).save(author);
     }
 }

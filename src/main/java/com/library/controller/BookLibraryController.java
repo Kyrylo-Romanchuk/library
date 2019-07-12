@@ -15,7 +15,6 @@ import com.library.validator.ValidationResult;
 import com.library.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.stream.Collectors;
 
 public class BookLibraryController implements Controller {
     private final BookDao bookDao;
@@ -46,15 +45,14 @@ public class BookLibraryController implements Controller {
 
     @GetMapping("/books")
     public String showBookList(HttpServletRequest request) {
-        request.setAttribute("books", bookDao.getAll());
+        request.setAttribute("books", bookBookDtoConverter.convert(bookDao.getAll()));
         return "/books/library.jsp";
     }
 
     @GetMapping("/books/add")
     public String showAddNewBook(HttpServletRequest request) {
         request.setAttribute("languages", languageDao.getAll());
-        authorAuthorDtoConverter.convert(authorDao.getAll());
-        request.setAttribute("authors", authorDao.getAll().stream().map(authorAuthorDtoConverter::convert).collect(Collectors.toList()));
+        request.setAttribute("authors", authorAuthorDtoConverter.convert(authorDao.getAll()));
         request.setAttribute("genres", genreDao.getAll());
         return "/books/bookAdd.jsp";
     }

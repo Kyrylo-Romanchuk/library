@@ -3,9 +3,6 @@ package com.library.data.converter;
 import com.library.data.dto.BookDto;
 import com.library.data.model.Book;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class BookToDtoConverter implements Converter<Book, BookDto> {
     private final AuthorToDtoConverter authorToDtoConverter;
 

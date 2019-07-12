@@ -30,13 +30,15 @@ public class BookDao implements CommonDao<Book> {
         return books.stream().filter(book -> book.getId().equals(id)).findFirst().orElse(null);
     }
 
+    @Override
     public void delete(Integer id) {
         books.remove(findById(id));
     }
 
+    @Override
     public void save(Book book) {
         Book foundBook = findById(book.getId());
-        if (foundBook != null){
+        if (foundBook != null) {
             delete(book.getId());
         }
         add(book);

@@ -11,7 +11,7 @@
             <th>Info</th>
             <th>Language</th>
             <th>Genres</th>
-            <th>Actions</th>
+            <th class="text-right">Actions</th>
         </tr>
         </thead>
 
@@ -19,14 +19,17 @@
             <tr>
                 <td>${book.getName()}</td>
                 <td>${book.getYear()}</td>
-                    <%--                to do change when will be add bookDto (getFullName())--%>
-                <td>${book.getAuthor().getFirstName()}</td>
+                <td>${book.getAuthor().getFullName()}</td>
                 <td>${book.getInfo()}</td>
                 <td>${book.getLanguage().getName()}</td>
                 <td>${book.getGenresString()}</td>
-                <td>
-                    <tag:actionButton method="post" url="${base}/books/delete" id="${book.getId()}">delete</tag:actionButton>
-                    <tag:actionButton method="get" url="${base}/books/edit" id="${book.getId()}">edit</tag:actionButton>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <tag:actionButton method="post" url="${base}/books/delete"
+                                          id="${book.getId()}">delete</tag:actionButton>
+                        <tag:actionButton method="get" url="${base}/books/edit"
+                                          id="${book.getId()}">edit</tag:actionButton>
+                    </div>
                 </td>
             </tr>
         </c:forEach>

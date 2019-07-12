@@ -60,9 +60,9 @@ public class Initializer {
         AuthorToDtoConverter authorAuthorDtoConverter = new AuthorToDtoConverter();
         Converter<Book, BookDto> bookBookDtoConverter = new BookToDtoConverter(authorAuthorDtoConverter);
         BookLibraryController bookLibraryController = new BookLibraryController(bookDao, authorDao, languageDao, genreDao, bookConverter, authorAuthorDtoConverter, bookBookDtoConverter, integerConverter, new BookValidator());
-        AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter), new AuthorValidator(), authorAuthorDtoConverter);
-        LanguageController languageController = new LanguageController(languageDao, new LanguageConverter(), new LanguageValidator());
-        GenreController genreController = new GenreController(genreDao, new GenreConverter(), new GenreValidator());
+        AuthorController authorController = new AuthorController(authorDao, new AuthorConverter(dateConverter, integerConverter), authorAuthorDtoConverter, integerConverter, new AuthorValidator());
+        LanguageController languageController = new LanguageController(languageDao, new LanguageConverter(integerConverter), integerConverter, new LanguageValidator());
+        GenreController genreController = new GenreController(genreDao, new GenreConverter(integerConverter), integerConverter, new GenreValidator());
 
         componentMap.put(bookLibraryController.getClass(), bookLibraryController);
         componentMap.put(authorController.getClass(), authorController);

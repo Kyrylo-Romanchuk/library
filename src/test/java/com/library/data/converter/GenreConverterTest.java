@@ -18,6 +18,9 @@ public class GenreConverterTest {
     @Mock
     private HttpServletRequest request;
 
+    @Mock
+    private IntegerConverter integerConverter;
+
     @InjectMocks
     private GenreConverter genreConverter;
 

@@ -1,6 +1,7 @@
 package com.library.controller;
 
 import com.library.data.converter.GenreConverter;
+import com.library.data.converter.IntegerConverter;
 import com.library.data.dao.GenreDao;
 import com.library.data.model.Genre;
 import com.library.validator.ValidationResult;
@@ -39,11 +40,14 @@ public class GenreControllerTest {
     @Mock
     private HttpServletRequest request;
 
+    @Mock
+    private IntegerConverter integerConverter;
+
     private GenreController genreController;
 
     @Before
     public void init() {
-        genreController = new GenreController(genreDao, genreConverter, genreValidator);
+        genreController = new GenreController(genreDao, genreConverter, integerConverter, genreValidator);
     }
 
     @Test
@@ -63,6 +67,6 @@ public class GenreControllerTest {
         when(genreConverter.convert(request)).thenReturn(genre);
         when(genreValidator.validate(genre)).thenReturn(new ValidationResult());
         assertEquals("redirect:/genres", genreController.add(request));
-        verify(genreDao).add(genre);
+        verify(genreDao).save(genre);
     }
 }

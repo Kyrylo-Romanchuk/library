@@ -29,4 +29,18 @@ public class AuthorDao implements CommonDao<Author> {
     public Author findById(Integer id) {
         return authors.stream().filter(author -> author.getId().equals(id)).findFirst().orElse(null);
     }
+
+    @Override
+    public void delete(Integer id) {
+        authors.remove(findById(id));
+    }
+
+    @Override
+    public void save(Author author) {
+        Author foundAuthor = findById(author.getId());
+        if (foundAuthor != null) {
+            delete(foundAuthor.getId());
+        }
+        authors.add(author);
+    }
 }
